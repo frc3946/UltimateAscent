@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.parsing.IInputOutput;
  * Drop in replacement for Joystick using XBOX USB Controller
  * @author gixxy
  */
-public class XboxJoystick extends GenericHID {
+public class XboxJoystick extends GenericHID implements IInputOutput {
     
     private DriverStation m_ds;
     private final int m_port;
