@@ -26,12 +26,12 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
          * The integer value representing this enumeration
          */
         public final int value;
-        static final int kLeftX_val = 1;
-        static final int kLeftY_val = 2;
-        static final int kTrigger_val = 3;
-        static final int kRightX_val = 4;
-        static final int kRightY_val = 5;
-        static final int kDLeftRight_val = 6;
+        private static final int kLeftX_val = 1;
+        private static final int kLeftY_val = 2;
+        private static final int kTrigger_val = 3;
+        private static final int kRightX_val = 4;
+        private static final int kRightY_val = 5;
+        private static final int kDLeftRight_val = 6;
         
         private AxisType(int value) {
             this.value = value;
@@ -77,16 +77,16 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
          * The integer value representing this enumeration
          */
         public final int value;
-        static final int kA_val = 1;
-        static final int kB_val = 2;
-        static final int kX_val = 3;
-        static final int kY_val = 4;
-        static final int kL_val = 5;
-        static final int kR_val = 6;
-        static final int kBack_val = 7;
-        static final int kSelect_val = 8;
-        static final int kXStick_val = 9;
-        static final int kYStick_val = 10;
+        private static final int kA_val = 1;
+        private static final int kB_val = 2;
+        private static final int kX_val = 3;
+        private static final int kY_val = 4;
+        private static final int kL_val = 5;
+        private static final int kR_val = 6;
+        private static final int kBack_val = 7;
+        private static final int kSelect_val = 8;
+        private static final int kLeftStick_val = 9;
+        private static final int kRightStick_val = 10;
         
         private ButtonType(int value) {
             this.value = value;
@@ -95,12 +95,12 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
         /**
          * Button: X-Joystick
          */
-        public static final ButtonType kXStick = new ButtonType(kXStick_val);
+        public static final ButtonType kLeftStick = new ButtonType(kLeftStick_val);
         
         /**
          * Button: Y-Joystick
          */
-        public static final ButtonType kYStick = new ButtonType(kYStick_val);
+        public static final ButtonType kRightStick = new ButtonType(kRightStick_val);
         
         /**
          * Button: X
@@ -152,44 +152,128 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
         m_port = port;
         m_ds = DriverStation.getInstance();
     }
-
+    
+    /**
+     * Retrieve value for X axis
+     * @param hand Hand associated with the Joystick
+     * @return Value of Axis (-1 to 1)
+     */
     public double getX(Hand hand) {
-        return 0;
+        if(hand.value == Hand.kRight.value) {
+            return getRawAxis(AxisType.kLeftX.value);
+        } else if(hand.value == Hand.kLeft.value) {
+            return getRawAxis(AxisType.kRightX.value);
+        } else {
+            return 0;
+        }
     }
-
+    
+    /**
+     * 
+     * @param hand Hand associated with the Joystick
+     * @return Value of Axis (-1 to 1)
+     */
     public double getY(Hand hand) {
-        return 0;
+        if(hand.value == Hand.kRight.value) {
+            return getRawAxis(AxisType.kLeftY.value);
+        } else if(hand.value == Hand.kLeft.value) {
+            return getRawAxis(AxisType.kRightY.value);
+        } else {
+            return 0;
+        }
     }
-
+    
+    /**
+     * Unused
+     * @param hand Unused
+     * @return 0
+     */
     public double getZ(Hand hand) {
         return 0;
     }
-
+    
+    /**
+     * Gets Value from D-Pad Left and Right Axis
+     * @return Axis Value (-1 to 1)
+     */
     public double getTwist() {
-        return 0;
+        return getRawAxis(AxisType.kDLeftRight.value);
     }
-
+    
+    /**
+     * Gets Value from Back Triggers
+     * @return Axis Value (-1 to 1)
+     */
     public double getThrottle() {
-        return 0;
+        return getRawAxis(AxisType.kTrigger.value);
     }
-
+    
+    /**
+     * Get Value from an Axis
+     * @param axis Axis Number
+     * @return Value from Axis (-1 to 1)
+     */
     public double getRawAxis(int axis) {
         return m_ds.getStickAxis(m_port, axis);
     }
-
+    
+    public double getAxis(AxisType axis) {
+        return getRawAxis(axis.value);
+    }
+    /**
+     * Unused
+     * @param hand Unused
+     * @return false
+     */
     public boolean getTrigger(Hand hand) {
         return false;
     }
-
+    
+    /**
+     * Get Button from Joystick
+     * @param hand hand associated with the button
+     * @return Button Status (true or false)
+     */
     public boolean getTop(Hand hand) {
-        return false;
+        if(hand.value == Hand.kRight.value) {
+            return getRawButton(ButtonType.kRightStick.value);
+        } else if(hand.value == Hand.kLeft.value) {
+            return getRawButton(ButtonType.kLeftStick.value);
+        } else {
+            return false;
+        }
     }
-
+    
+    /**
+     * Get Value from Back buttons
+     * @param hand hand associated with the button
+     * @return state of left or right 
+     */
     public boolean getBumper(Hand hand) {
-        return false;
+        if(hand.value == Hand.kRight.value) {
+            return getRawButton(ButtonType.kR.value);
+        } else if(hand.value == Hand.kLeft.value) {
+            return getRawButton(ButtonType.kL.value);
+        } else {
+            return false;
+        }
     }
-
+    
+    /**
+     * Gets value from a button
+     * @param button number of the button 
+     * @return State of the button
+     */
     public boolean getRawButton(int button) {
         return ((0x1 << (button - 1)) & m_ds.getStickButtons(m_port)) != 0;
+    }
+    
+    /**
+     * Get Value from button
+     * @param button
+     * @return 
+     */
+    public boolean getButton(ButtonType button) {
+        return getRawButton(button.value);
     }
 }
