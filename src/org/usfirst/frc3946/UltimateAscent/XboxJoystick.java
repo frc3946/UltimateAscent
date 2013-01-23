@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.parsing.IInputOutput;
 
 /**
- * Drop in replacement for Joystick using XBOX USB Controller
+ * A nearly drop in replacement for Joystick using an XBOX USB Controller
+ * This Class integrates well with JoystickButton
  * @author gixxy
  */
 public class XboxJoystick extends GenericHID implements IInputOutput {
@@ -169,7 +170,7 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
     }
     
     /**
-     * 
+     * Retrieve value for Y axis
      * @param hand Hand associated with the Joystick
      * @return Value of Axis (-1 to 1)
      */
@@ -217,16 +218,36 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
         return m_ds.getStickAxis(m_port, axis);
     }
     
+    /**
+     * Get Value from an Axis
+     * @param axis AxisType
+     * @return 
+     */
     public double getAxis(AxisType axis) {
         return getRawAxis(axis.value);
     }
+    
     /**
-     * Unused
-     * @param hand Unused
+     * Get Trigger Value as Button
+     * @param hand Hand associated with button
      * @return false
      */
     public boolean getTrigger(Hand hand) {
-        return false;
+        if(hand.value == Hand.kLeft.value) {
+            if(getAxis(AxisType.kTrigger) > .1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if(hand.value == Hand.kRight.value) {
+            if(getAxis(AxisType.kTrigger) < .1) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
     
     /**
@@ -269,11 +290,27 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
     }
     
     /**
-     * Get Value from button
-     * @param button
+     * Get Value from a button
+     * @param button Button Type
      * @return 
      */
     public boolean getButton(ButtonType button) {
         return getRawButton(button.value);
+    }
+    
+    /**
+     * Get State of Select Button
+     * @return State of button
+     */
+    public boolean getSelect() {
+        return getRawButton(ButtonType.kSelect.value);
+    }
+    
+    /**
+     * Get State of Back Button
+     * @return State of button
+     */
+    public boolean getBack() {
+        return getRawButton(ButtonType.kBack.value);
     }
 }
