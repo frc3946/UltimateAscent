@@ -313,4 +313,20 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
     public boolean getBack() {
         return getRawButton(ButtonType.kBack.value);
     }
+    
+    public boolean getAButton() {
+        return getRawButton(ButtonType.kA.value);
+    }
+    
+    public boolean getBButton() {
+        return getRawButton(ButtonType.kB.value);
+    }
+    
+    public boolean getXButton() {
+        return getRawButton(ButtonType.kX.value);
+    }
+    
+    public boolean getYButton() {
+        return getRawButton(ButtonType.kY.value);
+    }
 }
