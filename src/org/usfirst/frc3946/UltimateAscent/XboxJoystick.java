@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.parsing.IInputOutput;
 
 /**
  * A nearly drop in replacement for Joystick using an XBOX USB Controller
- * This Class integrates well with JoystickButton
- * @author gixxy
+ * @author Gustave Michel
  */
 public class XboxJoystick extends GenericHID implements IInputOutput {
     
@@ -314,18 +313,34 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
         return getRawButton(ButtonType.kBack.value);
     }
     
+    /**
+     * Get State of A Button
+     * @return State of button
+     */
     public boolean getAButton() {
         return getRawButton(ButtonType.kA.value);
     }
     
+    /**
+     * Get State of B Button
+     * @return State of button
+     */
     public boolean getBButton() {
         return getRawButton(ButtonType.kB.value);
     }
     
+    /**
+     * Get State of X Button
+     * @return State of button
+     */
     public boolean getXButton() {
         return getRawButton(ButtonType.kX.value);
     }
     
+    /**
+     * Get State of Y Button
+     * @return State of button
+     */
     public boolean getYButton() {
         return getRawButton(ButtonType.kY.value);
     }
