@@ -11,6 +11,8 @@
 
 package org.usfirst.frc3946.UltimateAscent.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc3946.UltimateAscent.Robot;
 
@@ -34,7 +36,7 @@ public class  TankDrive extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.driveTrain.tankDrive(Robot.oi.getleftStick().getY(), Robot.oi.getrightStick().getY());
+        Robot.driveTrain.tankDrive(Robot.oi.xbox.getY(Hand.kLeft), Robot.oi.xbox.getY(Hand.kRight));
     }
     
     // Make this return true when this Command no longer needs to run execute()
