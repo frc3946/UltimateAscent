@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.parsing.IInputOutput;
  * A nearly drop in replacement for Joystick using an XBOX USB Controller
  * @author Gustave Michel
  */
-public class XboxJoystick extends GenericHID implements IInputOutput {
+public class XboxController extends GenericHID implements IInputOutput {
     
     private DriverStation m_ds;
     private final int m_port;
@@ -148,7 +148,7 @@ public class XboxJoystick extends GenericHID implements IInputOutput {
      * Constructor
      * @param port USB Port on DriverStation
      */
-    public XboxJoystick(int port) {
+    public XboxController(int port) {
         m_port = port;
         m_ds = DriverStation.getInstance();
     }
