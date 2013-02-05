@@ -4,7 +4,9 @@
  */
 package org.usfirst.frc3946.UltimateAscent.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
  *
@@ -13,13 +15,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class FirePiston extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    private DoubleSolenoid pistonSolenoid;
+    
+    public FirePiston() {
+        System.out.println("(LoadPiston) Starting");
+        pistonSolenoid = new DoubleSolenoid(RobotMap.firePistonExtend, RobotMap.firePistonRetract);
+    }
     
     public void extend(){
+        System.out.println("(LoadPiston) Extend");
+        pistonSolenoid.set(DoubleSolenoid.Value.kReverse);
         
     }
     
     public void retract(){
-        
+        System.out.println("(LoadPiston) Retract");
+        pistonSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
     public void initDefaultCommand() {

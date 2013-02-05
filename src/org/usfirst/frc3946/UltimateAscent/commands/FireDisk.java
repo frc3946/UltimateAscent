@@ -6,32 +6,36 @@ package org.usfirst.frc3946.UltimateAscent.commands;
 
 /**
  *
- * @author Gustave Michel
+ * @author gixxy
  */
-public class TankDrive extends CommandBase {
+public class FireDisk extends CommandBase {
     
-    public TankDrive() {
+    public FireDisk() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(driveTrain);
+        requires(firePiston);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        
+        setTimeout(2);
+        firePiston.extend();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        driveTrain.tankDrive(oi.xbox);
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        firePiston.retract();
     }
 
     // Called when another command which requires one or more of the same

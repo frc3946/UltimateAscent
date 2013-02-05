@@ -34,8 +34,15 @@ public class RobotMap {
     //public static final int liftSpike = 1;
     
     //Solenoids
-    
+    public static final int firePistonRetract = 1;
+    public static final int firePistonExtend = 2;
     //Digital
     
     //Analog
+    
+    
+    
+    //Controls 
+    public static final int fireDisk = 3;
+    
 }

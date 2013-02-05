@@ -1,8 +1,13 @@
 
 package org.usfirst.frc3946.UltimateAscent;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc3946.UltimateAscent.commands.FireDisk;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -34,17 +39,26 @@ public class OI {
     // button.whenPressed(new ExampleCommand());
     
     // Run the command while the button is being held down and interrupt it once
-    // the button is released.
+    // the button is released
     // button.whileHeld(new ExampleCommand());
     
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
     public XboxController xbox;
-    
-    
+    private Button button;
+    private Joystick leftJoystick;
+    private Button fireDisk;
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
+
+         leftJoystick = new Joystick(RobotMap.leftJoystick);
+         fireDisk = new JoystickButton(leftJoystick, RobotMap.fireDisk);
+        
+        
+        fireDisk.whenPressed(new FireDisk());
+        
     }
+
 }
 
