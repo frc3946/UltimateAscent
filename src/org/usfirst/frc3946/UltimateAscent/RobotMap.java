@@ -24,7 +24,8 @@ public class RobotMap {
     public static final int cypress = 4;
     
     //Buttons
-    //public static final int Button = XboxJoystick.ButtonType.kX.value;
+    //public static final int Button = XboxController.ButtonType.kX.value;
+    public static final int fireDisk = XboxController.ButtonType.kL.value;
     
     //Motors
     public static final int leftJaguar = 1;
@@ -36,13 +37,11 @@ public class RobotMap {
     //Solenoids
     public static final int firePistonRetract = 1;
     public static final int firePistonExtend = 2;
+    
     //Digital
     
     //Analog
     
     
-    
-    //Controls 
-    public static final int fireDisk = 3;
     
 }

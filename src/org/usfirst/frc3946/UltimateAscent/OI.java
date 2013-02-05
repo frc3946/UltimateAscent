@@ -46,17 +46,16 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
     public XboxController xbox;
-    private Button button;
-    private Joystick leftJoystick;
+    
     private Button fireDisk;
+    
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
-
-         leftJoystick = new Joystick(RobotMap.leftJoystick);
-         fireDisk = new JoystickButton(leftJoystick, RobotMap.fireDisk);
+        fireDisk = new JoystickButton(xbox, RobotMap.fireDisk);
         
         
         fireDisk.whenPressed(new FireDisk());
+        
         
     }
 
