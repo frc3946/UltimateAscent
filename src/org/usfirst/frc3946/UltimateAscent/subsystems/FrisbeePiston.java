@@ -12,12 +12,12 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
  *
  * @author AJ
  */
-public class FirePiston extends Subsystem {
+public class FrisbeePiston extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     private DoubleSolenoid pistonSolenoid;
     
-    public FirePiston() {
+    public FrisbeePiston() {
         System.out.println("(LoadPiston) Starting");
         pistonSolenoid = new DoubleSolenoid(RobotMap.firePistonExtend, RobotMap.firePistonRetract);
     }
