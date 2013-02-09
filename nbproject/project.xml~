@@ -10,9 +10,9 @@
         <general-data xmlns="http://www.netbeans.org/ns/freeform-project/1">
             <name>UltimateAscent</name>
             <properties>
-                <property-file>${user.home}/.sunspotfrc.properties</property-file>
+                <property-file>${user.home}\.sunspotfrc.properties</property-file>
                 <property-file>build.properties</property-file>
-                <property-file>${sunspot.home}/default.properties</property-file>
+                <property-file>${sunspot.home}\default.properties</property-file>
             </properties>
             <folders>
                 <source-folder>
