@@ -1,12 +1,9 @@
 
 package org.usfirst.frc3946.UltimateAscent;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc3946.UltimateAscent.commands.LoadFrisbee;
 import org.usfirst.frc3946.UltimateAscent.commands.LaunchFrisbee;
 
 /**
@@ -47,17 +44,23 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     public XboxController xbox;
     
-    private Button fireDisk;
+    private Button fireFrisbee;
+    private Button loadFrisbee;
     
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
-        fireDisk = new JoystickButton(xbox, RobotMap.fireDisk);
+        fireFrisbee = new JoystickButton(xbox, RobotMap.fireFrisbee);
+        loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
         
-        
-        fireDisk.whenPressed(new LaunchFrisbee());
-        
+        fireFrisbee.whenPressed(new LaunchFrisbee());
+        loadFrisbee.whileHeld(new LoadFrisbee());
         
     }
 
+     
+    
+      
+        
+    
 }
 
