@@ -25,7 +25,7 @@ public class RobotMap {
     
     //Buttons
     //public static final int Button = XboxController.ButtonType.kX.value;
-    public static final int fireDisk = XboxController.ButtonType.kL.value;
+    public static final int fireFrisbee = XboxController.ButtonType.kL.value;
     public static final int loadFrisbee = XboxController.ButtonType.kA.value;
     //Motors
     public static final int leftJaguar = 1;

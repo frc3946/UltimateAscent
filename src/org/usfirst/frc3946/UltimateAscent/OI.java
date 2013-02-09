@@ -44,19 +44,16 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     public XboxController xbox;
     
-    private Button fireDisk;
+    private Button fireFrisbee;
     private Button loadFrisbee;
     
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
-        fireDisk = new JoystickButton(xbox, RobotMap.fireDisk);
-        
-        
-        fireDisk.whenPressed(new LaunchFrisbee());
+        fireFrisbee = new JoystickButton(xbox, RobotMap.fireFrisbee);
         loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
+        
+        fireFrisbee.whenPressed(new LaunchFrisbee());
         loadFrisbee.whileHeld(new LoadFrisbee());
-       
-        fireDisk.whenPressed(new LaunchFrisbee());
         
     }
 
