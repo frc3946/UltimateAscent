@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  * @author AJ
  */
-public class FireMotors extends Subsystem {
+public class FrisbeeMotor extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

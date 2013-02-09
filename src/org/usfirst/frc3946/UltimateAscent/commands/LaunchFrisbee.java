@@ -8,9 +8,9 @@ package org.usfirst.frc3946.UltimateAscent.commands;
  *
  * @author gixxy
  */
-public class FireDisk extends CommandBase {
+public class LaunchFrisbee extends CommandBase {
     
-    public FireDisk() {
+    public LaunchFrisbee() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(firePiston);
