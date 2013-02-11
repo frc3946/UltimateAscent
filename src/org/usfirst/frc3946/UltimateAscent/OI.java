@@ -3,7 +3,6 @@ package org.usfirst.frc3946.UltimateAscent;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc3946.UltimateAscent.commands.LoadFrisbee;
 import org.usfirst.frc3946.UltimateAscent.commands.LaunchFrisbee;
 
 /**
@@ -44,17 +43,12 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
     public XboxController xbox;
     
-    private Button fireFrisbee;
-    private Button loadFrisbee;
-    
+   
+    private Button launchFrisbee;
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
-        fireFrisbee = new JoystickButton(xbox, RobotMap.fireFrisbee);
-        loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
-        
-        fireFrisbee.whenPressed(new LaunchFrisbee());
-        loadFrisbee.whileHeld(new LoadFrisbee());
-        
+        launchFrisbee = new JoystickButton(xbox, RobotMap.launchFrisbee);
+        launchFrisbee.whenPressed(new LaunchFrisbee());
     }
 
      

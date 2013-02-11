@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.Relay;
  *
  * @author 10482352
  */
-public class LoadFrisbee extends CommandBase {
+public class SetFrisbee extends CommandBase {
     
-    public LoadFrisbee() {
+    public SetFrisbee() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(frisbeeLoader);

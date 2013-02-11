@@ -1,8 +1,10 @@
 package org.usfirst.frc3946.UltimateAscent.commands;
 
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.OI;
+import org.usfirst.frc3946.UltimateAscent.RobotMap;
 import org.usfirst.frc3946.UltimateAscent.subsystems.*;
 
 /**
@@ -19,7 +21,8 @@ public abstract class CommandBase extends Command {
     public static DriveTrain driveTrain = new DriveTrain();
     public static FrisbeeLoader frisbeeLoader= new FrisbeeLoader();
     public static FrisbeePiston firePiston = new FrisbeePiston();
-    
+    public static FrisbeeWheels frisbeeWheels = new FrisbeeWheels();
+ 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
