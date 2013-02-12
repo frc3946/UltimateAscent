@@ -23,6 +23,12 @@ public class DriveTrain extends Subsystem {
     private Jaguar right = new Jaguar(RobotMap.rightJaguar);
     private RobotDrive drive = new RobotDrive(left,right);
     
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new TankDrive());
+    }
+    
     public void tankDrive(GenericHID left, GenericHID right) {
         drive.tankDrive(left, right);
     }
@@ -35,15 +41,10 @@ public class DriveTrain extends Subsystem {
         drive.tankDrive(left, right);
     }
     
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-        setDefaultCommand(new TankDrive());
-    }
-    
     public DriveTrain() {
         super();
         LiveWindow.addActuator("DriveTrain", "RightWheel", right);
         LiveWindow.addActuator("DriveTrain", "LeftWheel", left);
+        System.out.println(this.getClass().getName()+" Initialized");
     }
 }

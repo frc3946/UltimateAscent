@@ -4,44 +4,42 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc3946.UltimateAscent.Robot;
-
-
 /**
  *
- * @author AJ
+ * @author gixxy
  */
-public class ArmBack extends Command {
+public class FirePiston extends CommandBase {
     
-    public ArmBack() {
+    public FirePiston() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-//        requires(Robot.binaryLoadLifter);
+        requires(firePiston);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        
+        setTimeout(2);
+        firePiston.extend();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//        loadLifter.back();
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-//        loadLifter.stop();
+        firePiston.retract();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
     }
 }

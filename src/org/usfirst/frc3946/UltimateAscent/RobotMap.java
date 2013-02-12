@@ -30,11 +30,13 @@ public class RobotMap {
     //Motors
     public static final int leftJaguar = 1;
     public static final int rightJaguar = 2;
-    public static final int frisbeeJaguar1 = 3;
-    public static final int frisbeeJaguar2 = 4;
+    public static final int frisbeeFirstWheel = 3;
+    public static final int frisbeeSecondWheel = 4;
+    
     //Relays (Spikes)
     //public static final int liftSpike = 1;
     public static final int frisbeeLoader = 1;
+    
     //Solenoids
     public static final int firePistonRetract = 1;
     public static final int firePistonExtend = 2;
