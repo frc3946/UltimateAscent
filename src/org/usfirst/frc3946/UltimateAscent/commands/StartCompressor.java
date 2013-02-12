@@ -6,41 +6,36 @@ package org.usfirst.frc3946.UltimateAscent.commands;
 
 /**
  *
- * @author gixxy
+ * @author Gustave Michel
  */
-public class FirePiston extends CommandBase {
+public class StartCompressor extends CommandBase {
     
-    public FirePiston() {
+    public StartCompressor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(firePiston);
+        requires(compressor);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        
-        setTimeout(.5);
-        firePiston.extend();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        
+        compressor.start();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        firePiston.retract();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
     }
 }

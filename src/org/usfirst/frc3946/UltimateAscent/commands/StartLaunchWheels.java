@@ -8,9 +8,9 @@ package org.usfirst.frc3946.UltimateAscent.commands;
  *
  * @author 10482352
  */
-public class Wheels extends CommandBase {
+public class StartLaunchWheels extends CommandBase {
     
-    public Wheels() {
+    public StartLaunchWheels() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(frisbeeWheels);
@@ -18,6 +18,7 @@ public class Wheels extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        setTimeout(2);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,17 +28,16 @@ public class Wheels extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        frisbeeWheels.set(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        end();
+        frisbeeWheels.set(0, 0);
     }
 }
