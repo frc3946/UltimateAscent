@@ -23,7 +23,7 @@ public class StartLaunchWheels extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        frisbeeWheels.set(0.4, 0.9);
+        frisbeeWheels.set(0.5, 0.7);
     }
 
     // Make this return true when this Command no longer needs to run execute()

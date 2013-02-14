@@ -7,6 +7,7 @@ package org.usfirst.frc3946.UltimateAscent.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
@@ -24,15 +25,22 @@ public class FrisbeePiston extends Subsystem {
     }
     
     public void extend(){
-        piston.set(DoubleSolenoid.Value.kReverse);
+        set(DoubleSolenoid.Value.kReverse);
     }
     
     public void retract(){
-        piston.set(DoubleSolenoid.Value.kForward);
+        set(DoubleSolenoid.Value.kForward);
     }
      
     public void set(DoubleSolenoid.Value value) {
         piston.set(value);
+        if(value == DoubleSolenoid.Value.kForward) {
+            SmartDashboard.putString("Loader", "Forward");
+        } else if(value == DoubleSolenoid.Value.kReverse) {
+            SmartDashboard.putString("Loader", "Reverse");
+        } else {
+            SmartDashboard.putString("Loader", "Off");
+        }
     }
     
     public FrisbeePiston() {

@@ -4,6 +4,7 @@ package org.usfirst.frc3946.UltimateAscent;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc3946.UltimateAscent.commands.LaunchFrisbee;
+import org.usfirst.frc3946.UltimateAscent.commands.LoadFrisbee;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,22 +43,20 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
     private XboxController xbox;
+    
     private Button launchFrisbee;
+    private Button loadFrisbee;
     
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
         launchFrisbee = new JoystickButton(xbox, RobotMap.launchFrisbee);
+        loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
         
         launchFrisbee.whenPressed(new LaunchFrisbee());
+        loadFrisbee.whileHeld(new LoadFrisbee());
     }
     
     public XboxController getXbox() {
         return xbox;
     }
-     
-    
-      
-        
-    
 }
-

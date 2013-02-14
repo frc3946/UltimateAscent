@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 import org.usfirst.frc3946.UltimateAscent.commands.TankDrive;
 
@@ -30,15 +31,17 @@ public class DriveTrain extends Subsystem {
     }
     
     public void tankDrive(GenericHID left, GenericHID right) {
-        drive.tankDrive(left, right);
+        tankDrive(left.getY(), right.getY());
     }
     
     public void tankDrive(GenericHID stick) {
-        drive.tankDrive(stick.getY(GenericHID.Hand.kLeft), stick.getY(GenericHID.Hand.kRight));
+        tankDrive(stick.getY(GenericHID.Hand.kLeft), stick.getY(GenericHID.Hand.kRight));
     }
     
     public void tankDrive(double left, double right) {
         drive.tankDrive(left, right);
+        SmartDashboard.putNumber("LeftDrive", left);
+        SmartDashboard.putNumber("RightDrive", right);
     }
     
     public DriveTrain() {

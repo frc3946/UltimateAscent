@@ -7,6 +7,7 @@ package org.usfirst.frc3946.UltimateAscent.subsystems;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
@@ -25,6 +26,13 @@ public class FrisbeeLoader extends Subsystem {
     
     public void set(Relay.Value value) {
         relay.set(value);
+        if(value == Relay.Value.kForward) {
+            SmartDashboard.putString("Loader", "Forward");
+        } else if(value == Relay.Value.kReverse) {
+            SmartDashboard.putString("Loader", "Reverse");
+        } else {
+            SmartDashboard.putString("Loader", "Off");
+        }
     }
     
     public FrisbeeLoader() {
