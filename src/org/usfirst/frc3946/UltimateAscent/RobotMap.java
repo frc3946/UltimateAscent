@@ -38,13 +38,18 @@ public class RobotMap {
     //public static final int liftSpike = 1;
     public static final int compressorRelay = 1;
     public static final int frisbeeLoader = 2;
+    public static final int climbingMotor = 3;
+    public static final int deflector = 4;
     
     //Solenoids
     public static final int firePistonRetract = 1;
     public static final int firePistonExtend = 2;
+    public static final int pistonExtend = 3;
+    public static final int pistonRetract = 4;
     
     //Digital
     public static final int pressureSwitch = 1;
+    
     //Analog
     
     
