@@ -3,8 +3,9 @@ package org.usfirst.frc3946.UltimateAscent;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc3946.UltimateAscent.commands.LaunchFrisbee;
 import org.usfirst.frc3946.UltimateAscent.commands.LoadFrisbee;
+import org.usfirst.frc3946.UltimateAscent.commands.StartLaunchWheels;
+import org.usfirst.frc3946.UltimateAscent.commands.StopLaunchWheels;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -52,7 +53,8 @@ public class OI {
         launchFrisbee = new JoystickButton(xbox, RobotMap.launchFrisbee);
         loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
         
-        launchFrisbee.whenPressed(new LaunchFrisbee());
+        launchFrisbee.whileHeld(new StartLaunchWheels());
+        launchFrisbee.whenReleased(new StopLaunchWheels());
         loadFrisbee.whileHeld(new LoadFrisbee());
     }
     

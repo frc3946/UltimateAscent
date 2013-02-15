@@ -29,10 +29,10 @@ public class RobotMap {
     public static final int loadFrisbee = XboxController.ButtonType.kY.value;
  
     //Motors
-    public static final int leftJaguar = 1;
-    public static final int rightJaguar = 2;
-    public static final int frisbeeFirstWheel = 3;
-    public static final int frisbeeSecondWheel = 4;
+    public static final int leftJaguar = 10;
+    public static final int rightJaguar = 9;
+    public static final int frisbeeFirstWheel = 8;
+    public static final int frisbeeSecondWheel = 7;
     
     //Relays (Spikes)
     //public static final int liftSpike = 1;
