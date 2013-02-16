@@ -53,6 +53,6 @@ public class RobotMap {
     
     //Analog
     
-    public static final int climbingAccelerometer = 2;
+    public static final int currentSensor = 1;
     
 }

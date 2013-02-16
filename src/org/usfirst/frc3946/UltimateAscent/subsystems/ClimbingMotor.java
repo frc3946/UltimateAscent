@@ -4,7 +4,9 @@
  */
 package org.usfirst.frc3946.UltimateAscent.subsystems;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.Accelerometer;
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
@@ -15,13 +17,14 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
  */
 public class ClimbingMotor extends PIDSubsystem {
 
-    private static final double Kp = 0.0;
+    private static final double Kp = 1.0;
     private static final double Ki = 0.0;
     private static final double Kd = 0.0;
 
     // Initialize your subsystem here
     Relay motor = new Relay(RobotMap.climbingMotor);
-    Accelerometer balancer = new Accelerometer(RobotMap.climbingAccelerometer);
+    ADXL345_I2C balancer = new ADXL345_I2C(1,ADXL345_I2C.DataFormat_Range.k8G);
+    AnalogChannel currentSensor = new AnalogChannel(RobotMap.currentSensor);
     public ClimbingMotor() {
         super("ClimbingMotor", Kp, Ki, Kd);
 
@@ -40,12 +43,29 @@ public class ClimbingMotor extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return 0.0;
+        return balancer.getAcceleration(ADXL345_I2C.Axes.kY);
     }
     
     protected void usePIDOutput(double output) {
+    
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
+        double amps = currentSensor.getVoltage()*15.7;
+        if(amps > 25){
+            motor.set(Relay.Value.kOff);
+            return ;
+        }
+        if(output > 0.1){
+            motor.set(Relay.Value.kForward);
+        }
+        else if(output < -0.1){
+            motor.set(Relay.Value.kReverse);
+        }
+        else{
+            motor.set(Relay.Value.kOff);
+        }
+        
+        
     }
     
     public void set(Relay.Value value) {
