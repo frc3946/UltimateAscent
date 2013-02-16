@@ -25,7 +25,7 @@ public class FrisbeeWheels extends Subsystem {
     }
     
     public void set(double firstSpeed, double secondSpeed) {
-        firstWheel.set(-1*firstSpeed);
+        firstWheel.set(firstSpeed);
         //secondWheel.set(-1*secondSpeed);
     }
     

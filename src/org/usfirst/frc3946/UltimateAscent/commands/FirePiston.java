@@ -6,7 +6,7 @@ package org.usfirst.frc3946.UltimateAscent.commands;
 
 /**
  *
- * @author gixxy
+ * @author Gustave Michel
  */
 public class FirePiston extends CommandBase {
     

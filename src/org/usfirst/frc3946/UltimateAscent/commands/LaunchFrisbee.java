@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
- * @author Mak
+ * @author AJ
  */
 public class LaunchFrisbee extends CommandGroup {
     

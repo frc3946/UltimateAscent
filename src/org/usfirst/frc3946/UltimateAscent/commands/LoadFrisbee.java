@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Relay;
 
 /**
  *
- * @author 10482352
+ * @author Makaylah
  */
 public class LoadFrisbee extends CommandBase {
     
