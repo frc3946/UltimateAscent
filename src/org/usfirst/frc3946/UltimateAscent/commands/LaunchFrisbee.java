@@ -32,7 +32,8 @@ public class LaunchFrisbee extends CommandGroup {
         // arm.
         addSequential(new StartLaunchWheels());
         //for(int i = 0; i < 3; i++) {
-            addSequential(new FirePiston());
+        addSequential(new FirePiston());
+        addSequential(new IncrementFrisbee());
         //}
         //addSequential(new LoadFrisbee(), 1.5);
         //addSequential(new FirePiston());

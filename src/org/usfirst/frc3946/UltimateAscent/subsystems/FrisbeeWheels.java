@@ -35,4 +35,12 @@ public class FrisbeeWheels extends Subsystem {
         LiveWindow.addActuator("FrisbeeWheels", "SecondWheel", secondWheel);
         System.out.println(this.getClass().getName()+" Initialized");
     }
+    
+    public boolean isRunning() {
+        if(firstWheel.getSpeed() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
