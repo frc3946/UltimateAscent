@@ -4,40 +4,51 @@
  */
 package org.usfirst.frc3946.UltimateAscent.subsystems;
 
+import edu.wpi.first.wpilibj.Accelerometer;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
  *
- * @author 10482352
+ * @author Gustave Michel
  */
-public class ClimbingMotor extends Subsystem {
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    private Relay relay = new Relay(RobotMap.climbingMotor);
+public class ClimbingMotor extends PIDSubsystem {
+
+    private static final double Kp = 0.0;
+    private static final double Ki = 0.0;
+    private static final double Kd = 0.0;
+
+    // Initialize your subsystem here
+    Relay motor = new Relay(RobotMap.climbingMotor);
+    Accelerometer balancer = new Accelerometer(RobotMap.climbingAccelerometer);
+    public ClimbingMotor() {
+        super("ClimbingMotor", Kp, Ki, Kd);
+
+        // Use these to get going:
+        // setSetpoint() -  Sets where the PID controller should move the system
+        //                  to
+        // enable() - Enables the PID controller.
+    }
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void set(Relay.Value value) {
-        relay.set(value);
-        if(value == Relay.Value.kForward) {
-            SmartDashboard.putString("Loader", "Forward");
-        } else if (value == Relay.Value.kReverse) {
-            SmartDashboard.putString("Loader", "Reverse");
-        } else {
-            SmartDashboard.putString("Loader", "Off");
-        }
+    protected double returnPIDInput() {
+        // Return your input value for the PID loop
+        // e.g. a sensor, like a potentiometer:
+        // yourPot.getAverageVoltage() / kYourMaxVoltage;
+        return 0.0;
     }
     
-    public ClimbingMotor() {
-        super();
-        LiveWindow.addActuator("ClimbingMotor", "Spike", relay);
-        System.out.println(this.getClass().getName()+ "Initialized");
+    protected void usePIDOutput(double output) {
+        // Use output to drive your system, like a motor
+        // e.g. yourMotor.set(output);
+    }
+    
+    public void set(Relay.Value value) {
+        motor.set(value);
     }
 }

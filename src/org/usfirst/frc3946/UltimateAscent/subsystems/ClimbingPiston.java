@@ -25,13 +25,11 @@ public class ClimbingPiston extends Subsystem {
     }
     
     public void extend(){
-        piston.set(DoubleSolenoid.Value.kForward);
-        SmartDashboard.putString("Loader", "Forward");
+        set(DoubleSolenoid.Value.kForward);
     }
     
     public void retract(){
-        piston.set(DoubleSolenoid.Value.kReverse);
-        SmartDashboard.putString("Loader", "Reverse");
+        set(DoubleSolenoid.Value.kReverse);
     }
     
     public void set(DoubleSolenoid.Value value) {

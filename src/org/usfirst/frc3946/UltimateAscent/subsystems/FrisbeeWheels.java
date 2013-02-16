@@ -4,7 +4,7 @@
  */
 package org.usfirst.frc3946.UltimateAscent.subsystems;
 
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
@@ -16,8 +16,8 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
 public class FrisbeeWheels extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    public Jaguar firstWheel = new Jaguar(RobotMap.frisbeeFirstWheel);
-    public Jaguar secondWheel = new Jaguar(RobotMap.frisbeeSecondWheel);
+    public Victor firstWheel = new Victor(RobotMap.frisbeeFirstWheel);
+    public Victor secondWheel = new Victor(RobotMap.frisbeeSecondWheel);
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -26,7 +26,7 @@ public class FrisbeeWheels extends Subsystem {
     
     public void set(double firstSpeed, double secondSpeed) {
         firstWheel.set(firstSpeed);
-        //secondWheel.set(-1*secondSpeed);
+        secondWheel.set(-1*secondSpeed);
     }
     
     public FrisbeeWheels() {

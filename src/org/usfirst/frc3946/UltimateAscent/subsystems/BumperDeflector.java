@@ -6,6 +6,7 @@ package org.usfirst.frc3946.UltimateAscent.subsystems;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
@@ -24,13 +25,11 @@ public class BumperDeflector extends Subsystem {
     }
     
     public void extend() {
-        deflector.set(Relay.Value.kForward);
-        SmartDashboard.putString("Loader", "Forward");
+        set(Relay.Value.kForward);
     }
     
     public void retract() {
-        deflector.set(Relay.Value.kReverse);
-        SmartDashboard.putString("Loader", "Reverse");
+        set(Relay.Value.kReverse);
     }
     
     public void set(Relay.Value value) {
@@ -42,5 +41,11 @@ public class BumperDeflector extends Subsystem {
         } else {
             SmartDashboard.putString("Loader", "Off");
         }
+    }
+    
+    public BumperDeflector() {
+        super();
+        LiveWindow.addActuator("BumperDeflector", "Deflector", deflector);
+        System.out.println(this.getClass().getName()+" Initialized");
     }
 }

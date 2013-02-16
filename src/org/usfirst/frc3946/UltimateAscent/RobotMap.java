@@ -27,12 +27,13 @@ public class RobotMap {
     //public static final int Button = XboxController.ButtonType.kX.value;
     public static final int launchFrisbee = XboxController.ButtonType.kR.value;
     public static final int loadFrisbee = XboxController.ButtonType.kY.value;
+    public static final int firePiston = XboxController.ButtonType.kX.value;
  
     //Motors
-    public static final int leftJaguar = 10;
-    public static final int rightJaguar = 9;
-    public static final int frisbeeFirstWheel = 8;
-    public static final int frisbeeSecondWheel = 7;
+    public static final int leftJaguar = 1;
+    public static final int rightJaguar = 2;
+    public static final int frisbeeFirstWheel = 3;
+    public static final int frisbeeSecondWheel = 4;
     
     //Relays (Spikes)
     //public static final int liftSpike = 1;
@@ -42,16 +43,16 @@ public class RobotMap {
     public static final int deflector = 4;
     
     //Solenoids
-    public static final int firePistonRetract = 1;
-    public static final int firePistonExtend = 2;
-    public static final int pistonExtend = 3;
-    public static final int pistonRetract = 4;
+    public static final int firePistonRetract = 1; //Black Hose
+    public static final int firePistonExtend = 2; //White Hose
+    public static final int pistonRetract = 3; //Black Hose
+    public static final int pistonExtend = 4; //White Hose
     
     //Digital
     public static final int pressureSwitch = 1;
     
     //Analog
     
-    
+    public static final int climbingAccelerometer = 2;
     
 }

@@ -24,7 +24,7 @@ public class LoadFrisbee extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        frisbeeLoader.set(Relay.Value.kForward);
+        frisbeeLoader.set(Relay.Value.kReverse);
     }
 
     // Make this return true when this Command no longer needs to run execute()

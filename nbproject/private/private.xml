@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/CommandBase.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/FirePiston.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/LaunchFrisbee.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/LoadFrisbee.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/StartLaunchWheels.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/StopLaunchWheels.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/Compressor.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/RobotMap.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/DriveTrain.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/StartCompressor.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/StopCompressor.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/Robot.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/OI.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/XboxController.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/RaspberryPi.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/FrisbeeWheels.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/FrisbeeLoader.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/FrisbeePiston.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/TankDrive.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/ClimbingPiston.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/ClimbingMotor.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/BumperDeflector.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/MoveClimbingMotor.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/RetractBumperDeflector.java</file>
+    </open-files>
 </project-private>

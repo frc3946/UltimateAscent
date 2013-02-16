@@ -26,12 +26,10 @@ public class FrisbeePiston extends Subsystem {
     
     public void extend(){
         set(DoubleSolenoid.Value.kReverse);
-         SmartDashboard.putString("Loader", "Reverse");
     }
     
     public void retract(){
         set(DoubleSolenoid.Value.kForward);
-        SmartDashboard.putString("Loader", "Forward");
     }
      
     public void set(DoubleSolenoid.Value value) {
