@@ -23,7 +23,9 @@ public abstract class CommandBase extends Command {
     public static FrisbeeLoader frisbeeLoader= new FrisbeeLoader();
     public static FrisbeePiston firePiston = new FrisbeePiston();
     public static FrisbeeWheels frisbeeWheels = new FrisbeeWheels();
- 
+    public static ClimbingPiston climbingPiston = new ClimbingPiston();
+    public static ClimbingMotor climbingMotor = new ClimbingMotor();
+    public static BumperDeflector deflector = new BumperDeflector();
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
