@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
- * @author 10482352
+ * @author AJ
  */
 public class LaunchFrisbee extends CommandGroup {
     
@@ -30,10 +30,13 @@ public class LaunchFrisbee extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-        
-        addSequential(new SetFrisbee());
-        addParallel(new Wheels());
-        Timer.delay(1.5);
-        addSequential(new SetFirePiston());
+        addSequential(new StartLaunchWheels());
+        //for(int i = 0; i < 3; i++) {
+            addSequential(new FirePiston());
+        //}
+        //addSequential(new LoadFrisbee(), 1.5);
+        //addSequential(new FirePiston());
+        addParallel(new StopLaunchWheels());
+        //addSequential(new LoadFrisbee(), 1.5);
     }
 }

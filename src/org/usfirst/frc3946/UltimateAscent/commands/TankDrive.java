@@ -4,6 +4,8 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
+
 /**
  *
  * @author Gustave Michel
@@ -22,7 +24,7 @@ public class TankDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        driveTrain.tankDrive(oi.xbox);
+        driveTrain.tankDrive(oi.getXbox().getY(GenericHID.Hand.kLeft), oi.getXbox().getY(GenericHID.Hand.kRight));
     }
 
     // Make this return true when this Command no longer needs to run execute()

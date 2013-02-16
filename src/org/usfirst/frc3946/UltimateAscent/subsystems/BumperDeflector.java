@@ -6,38 +6,41 @@ package org.usfirst.frc3946.UltimateAscent.subsystems;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
  *
- * @author Makaylah
+ * @author 10482352
  */
-public class FrisbeeLoader extends Subsystem {
+public class BumperDeflector extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private Relay relay = new Relay(RobotMap.frisbeeLoader);
-    
+      private Relay deflector = new Relay(RobotMap.deflector);
+      
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    public void extend() {
+        deflector.set(Relay.Value.kForward);
+        SmartDashboard.putString("Loader", "Forward");
+    }
+    
+    public void retract() {
+        deflector.set(Relay.Value.kReverse);
+        SmartDashboard.putString("Loader", "Reverse");
+    }
+    
     public void set(Relay.Value value) {
-        relay.set(value);
+        deflector.set(value);
         if(value == Relay.Value.kForward) {
             SmartDashboard.putString("Loader", "Forward");
         } else if(value == Relay.Value.kReverse) {
-            SmartDashboard.putString("Loader", "Reverse");
+           SmartDashboard.putString("Loader", "Reverse");
         } else {
             SmartDashboard.putString("Loader", "Off");
         }
-    }
-    
-    public FrisbeeLoader() {
-        super();
-        LiveWindow.addActuator("FrisbeeLoader", "Spike", relay);
-        System.out.println(this.getClass().getName()+ "Initialized");
     }
 }

@@ -4,15 +4,13 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
- * @author AJ
+ * @author Gustave Michel
  */
-public class ArmDown extends Command {
+public class StopCompressor extends CommandBase {
     
-    public ArmDown() {
+    public StopCompressor() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

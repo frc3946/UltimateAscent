@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.Relay;
 
 /**
  *
- * @author 10482352
+ * @author Makaylah
  */
-public class SetFrisbee extends CommandBase {
+public class LoadFrisbee extends CommandBase {
     
-    public SetFrisbee() {
+    public LoadFrisbee() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(frisbeeLoader);
@@ -24,7 +24,7 @@ public class SetFrisbee extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        frisbeeLoader.relay.set(Relay.Value.kForward);
+        frisbeeLoader.set(Relay.Value.kForward);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,6 +39,6 @@ public class SetFrisbee extends CommandBase {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        frisbeeLoader.relay.set(Relay.Value.kOff);
+        frisbeeLoader.set(Relay.Value.kOff);
     }
 }

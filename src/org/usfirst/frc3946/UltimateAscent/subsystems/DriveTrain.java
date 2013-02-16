@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 import org.usfirst.frc3946.UltimateAscent.commands.TankDrive;
 
@@ -23,27 +24,30 @@ public class DriveTrain extends Subsystem {
     private Jaguar right = new Jaguar(RobotMap.rightJaguar);
     private RobotDrive drive = new RobotDrive(left,right);
     
-    public void tankDrive(GenericHID left, GenericHID right) {
-        drive.tankDrive(left, right);
-    }
-    
-    public void tankDrive(GenericHID stick) {
-        drive.tankDrive(stick.getY(GenericHID.Hand.kLeft), stick.getY(GenericHID.Hand.kRight));
-    }
-    
-    public void tankDrive(double left, double right) {
-        drive.tankDrive(left, right);
-    }
-    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
         setDefaultCommand(new TankDrive());
     }
     
+    public void tankDrive(GenericHID left, GenericHID right) {
+        tankDrive(left.getY(), right.getY());
+    }
+    
+    public void tankDrive(GenericHID stick) {
+        tankDrive(stick.getY(GenericHID.Hand.kLeft), stick.getY(GenericHID.Hand.kRight));
+    }
+    
+    public void tankDrive(double left, double right) {
+        drive.tankDrive(left, right);
+        SmartDashboard.putNumber("LeftDrive", left);
+        SmartDashboard.putNumber("RightDrive", right);
+    }
+    
     public DriveTrain() {
         super();
         LiveWindow.addActuator("DriveTrain", "RightWheel", right);
         LiveWindow.addActuator("DriveTrain", "LeftWheel", left);
+        System.out.println(this.getClass().getName()+" Initialized");
     }
 }

@@ -25,21 +25,30 @@ public class RobotMap {
     
     //Buttons
     //public static final int Button = XboxController.ButtonType.kX.value;
-    public static final int launchFrisbee = XboxController.ButtonType.kL.value;
+    public static final int launchFrisbee = XboxController.ButtonType.kR.value;
+    public static final int loadFrisbee = XboxController.ButtonType.kY.value;
  
     //Motors
-    public static final int leftJaguar = 1;
-    public static final int rightJaguar = 2;
-    public static final int frisbeeJaguar1 = 3;
-    public static final int frisbeeJaguar2 = 4;
+    public static final int leftJaguar = 10;
+    public static final int rightJaguar = 9;
+    public static final int frisbeeFirstWheel = 8;
+    public static final int frisbeeSecondWheel = 7;
+    
     //Relays (Spikes)
     //public static final int liftSpike = 1;
-    public static final int frisbeeLoader = 1;
+    public static final int compressorRelay = 1;
+    public static final int frisbeeLoader = 2;
+    public static final int climbingMotor = 3;
+    public static final int deflector = 4;
+    
     //Solenoids
     public static final int firePistonRetract = 1;
     public static final int firePistonExtend = 2;
+    public static final int pistonExtend = 3;
+    public static final int pistonRetract = 4;
     
     //Digital
+    public static final int pressureSwitch = 1;
     
     //Analog
     

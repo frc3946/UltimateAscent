@@ -6,6 +6,8 @@ package org.usfirst.frc3946.UltimateAscent.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
@@ -15,26 +17,37 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
 public class FrisbeePiston extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private DoubleSolenoid pistonSolenoid;
-    
-    public FrisbeePiston() {
-        System.out.println("(LoadPiston) Starting");
-        pistonSolenoid = new DoubleSolenoid(RobotMap.firePistonExtend, RobotMap.firePistonRetract);
-    }
-    
-    public void extend(){
-        System.out.println("(LoadPiston) Extend");
-        pistonSolenoid.set(DoubleSolenoid.Value.kReverse);
-        
-    }
-    
-    public void retract(){
-        System.out.println("(LoadPiston) Retract");
-        pistonSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
+    private DoubleSolenoid piston = new DoubleSolenoid(RobotMap.firePistonExtend, RobotMap.firePistonRetract);
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public void extend(){
+        set(DoubleSolenoid.Value.kReverse);
+         SmartDashboard.putString("Loader", "Reverse");
+    }
+    
+    public void retract(){
+        set(DoubleSolenoid.Value.kForward);
+        SmartDashboard.putString("Loader", "Forward");
+    }
+     
+    public void set(DoubleSolenoid.Value value) {
+        piston.set(value);
+        if(value == DoubleSolenoid.Value.kForward) {
+            SmartDashboard.putString("Loader", "Forward");
+        } else if(value == DoubleSolenoid.Value.kReverse) {
+            SmartDashboard.putString("Loader", "Reverse");
+        } else {
+            SmartDashboard.putString("Loader", "Off");
+        }
+    }
+    
+    public FrisbeePiston() {
+        super();
+        LiveWindow.addActuator("FrisbeePiston", "Piston", piston);
+        System.out.println(this.getClass().getName()+" Initialized");
     }
 }

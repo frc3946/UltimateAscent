@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc3946.UltimateAscent.commands.Autonomous;
 import org.usfirst.frc3946.UltimateAscent.commands.CommandBase;
+import org.usfirst.frc3946.UltimateAscent.commands.StartCompressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,7 +26,7 @@ import org.usfirst.frc3946.UltimateAscent.commands.CommandBase;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
-
+    Command compressor = new StartCompressor();
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -33,7 +34,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         // instantiate the command used for the autonomous period
         autonomousCommand = new Autonomous();
-
+        compressor.start();
         // Initialize all subsystems
         CommandBase.init();
     }
@@ -56,6 +57,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         autonomousCommand.cancel();
+        
     }
 
     /**

@@ -12,12 +12,12 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
  *
- * @author Makaylah
+ * @author 10482352
  */
-public class FrisbeeLoader extends Subsystem {
+public class ClimbingMotor extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private Relay relay = new Relay(RobotMap.frisbeeLoader);
+    private Relay relay = new Relay(RobotMap.climbingMotor);
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -28,16 +28,16 @@ public class FrisbeeLoader extends Subsystem {
         relay.set(value);
         if(value == Relay.Value.kForward) {
             SmartDashboard.putString("Loader", "Forward");
-        } else if(value == Relay.Value.kReverse) {
+        } else if (value == Relay.Value.kReverse) {
             SmartDashboard.putString("Loader", "Reverse");
         } else {
             SmartDashboard.putString("Loader", "Off");
         }
     }
     
-    public FrisbeeLoader() {
+    public ClimbingMotor() {
         super();
-        LiveWindow.addActuator("FrisbeeLoader", "Spike", relay);
+        LiveWindow.addActuator("ClimbingMotor", "Spike", relay);
         System.out.println(this.getClass().getName()+ "Initialized");
     }
 }
