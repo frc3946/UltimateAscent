@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.Relay;
  *
  * @author 10374778
  */
-public class MoveClimbingMotor extends CommandBase {
+public class MoveClimbingMotorBackwards extends CommandBase {
     
-    public MoveClimbingMotor() {
+    public MoveClimbingMotorBackwards() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires (climbingMotor);
@@ -22,9 +22,8 @@ public class MoveClimbingMotor extends CommandBase {
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        climbingMotor.set(Relay.Value.kForward);
+        climbingMotor.set(Relay.Value.kReverse);
     }
 
     // Make this return true when this Command no longer needs to run execute()

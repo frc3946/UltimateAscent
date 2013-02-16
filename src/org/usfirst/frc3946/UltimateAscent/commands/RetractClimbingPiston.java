@@ -14,20 +14,27 @@ public class RetractClimbingPiston extends CommandBase {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires (climbingPiston);
+        requires (climbingMotor);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+       setTimeout(5);
+       climbingPiston.retract();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        climbingPiston.retract();
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        if (climbingMotor.IsTimeToAbort() == true){
+            climbingPiston.stop();
+            return true;
+        }
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

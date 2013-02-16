@@ -5,7 +5,6 @@
 package org.usfirst.frc3946.UltimateAscent.subsystems;
 
 import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.Accelerometer;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -50,7 +49,7 @@ public class ClimbingMotor extends PIDSubsystem {
     
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-        double amps = currentSensor.getVoltage()*15.7;
+        double amps = getAmps();
         if(amps > 25){
             motor.set(Relay.Value.kOff);
             return ;
@@ -70,5 +69,27 @@ public class ClimbingMotor extends PIDSubsystem {
     
     public void set(Relay.Value value) {
         motor.set(value);
+    }
+    
+    public boolean AmIBalanced(){
+        double YAxis = balancer.getAcceleration(ADXL345_I2C.Axes.kY);
+        if (YAxis < 0.1 && YAxis > -0.1){
+           return true;}
+        else {
+            return false;
+        }}
+    
+    public boolean IsTimeToAbort(){
+        double YAxis = balancer.getAcceleration(ADXL345_I2C.Axes.kY);
+        if (YAxis < 0.6 && YAxis > -0.6){
+           return false;
+        }
+        else {
+            return true;
+        }
+    }
+    
+    public double getAmps(){
+        return currentSensor.getVoltage()*15.7;
     }
 }

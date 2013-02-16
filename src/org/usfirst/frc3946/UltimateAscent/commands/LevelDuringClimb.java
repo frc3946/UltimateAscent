@@ -4,15 +4,13 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
-import edu.wpi.first.wpilibj.Relay;
-
 /**
  *
  * @author 10374778
  */
-public class MoveClimbingMotor extends CommandBase {
+public class LevelDuringClimb extends CommandBase {
     
-    public MoveClimbingMotor() {
+    public LevelDuringClimb() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires (climbingMotor);
@@ -20,26 +18,22 @@ public class MoveClimbingMotor extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        climbingMotor.setSetpoint(0.0);
+        climbingMotor.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        climbingMotor.set(Relay.Value.kForward);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (climbingMotor.getAmps() > 17){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return climbingMotor.AmIBalanced();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        climbingMotor.set(Relay.Value.kOff);
+        climbingMotor.disable();
     }
 
     // Called when another command which requires one or more of the same

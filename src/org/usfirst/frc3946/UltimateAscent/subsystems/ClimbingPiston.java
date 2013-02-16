@@ -28,6 +28,10 @@ public class ClimbingPiston extends Subsystem {
         set(DoubleSolenoid.Value.kForward);
     }
     
+    public void stop(){
+        set(DoubleSolenoid.Value.kOff);
+    }
+    
     public void retract(){
         set(DoubleSolenoid.Value.kReverse);
     }
