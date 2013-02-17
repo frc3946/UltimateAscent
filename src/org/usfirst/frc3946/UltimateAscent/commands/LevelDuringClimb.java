@@ -4,12 +4,17 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  *
  * @author 10374778
  */
 public class LevelDuringClimb extends CommandBase {
-    
+    double currentTime;
+    double lastFail = 0;
+    boolean balanced = false;
+            
     public LevelDuringClimb() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,10 +26,21 @@ public class LevelDuringClimb extends CommandBase {
         System.out.println("LevelDuringClimb");
         climbingMotor.setSetpoint(0.0);
         climbingMotor.enable();
+        setTimeout (2);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        currentTime = Timer.getFPGATimestamp();
+        
+        if (climbingMotor.AmIBalanced() == false) {
+            lastFail = currentTime;
+            balanced = false;
+        } else {
+            if (currentTime - lastFail > 2) {
+                balanced = true;
+            }
+        }
         
         
     }
@@ -32,7 +48,7 @@ public class LevelDuringClimb extends CommandBase {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         
-        return climbingMotor.AmIBalanced();
+        return balanced;
     }
 
     // Called once after isFinished returns true
