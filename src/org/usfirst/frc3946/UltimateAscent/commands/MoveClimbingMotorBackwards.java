@@ -20,6 +20,7 @@ public class MoveClimbingMotorBackwards extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+         System.out.println("MoveClimbingMotorBackwards");
     }
 
     protected void execute() {

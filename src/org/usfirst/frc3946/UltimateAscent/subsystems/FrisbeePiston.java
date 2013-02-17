@@ -17,7 +17,7 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
 public class FrisbeePiston extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    private DoubleSolenoid piston = new DoubleSolenoid(RobotMap.firePistonExtend, RobotMap.firePistonRetract);
+    private DoubleSolenoid piston = new DoubleSolenoid(RobotMap.firePistonRetract, RobotMap.firePistonExtend);
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -25,19 +25,19 @@ public class FrisbeePiston extends Subsystem {
     }
     
     public void extend(){
-        set(DoubleSolenoid.Value.kReverse);
+        set(DoubleSolenoid.Value.kForward);
     }
     
     public void retract(){
-        set(DoubleSolenoid.Value.kForward);
+        set(DoubleSolenoid.Value.kReverse);
     }
      
     public void set(DoubleSolenoid.Value value) {
         piston.set(value);
         if(value == DoubleSolenoid.Value.kForward) {
-            SmartDashboard.putString("Loader", "Forward");
+            SmartDashboard.putString("Loader", "Extend");
         } else if(value == DoubleSolenoid.Value.kReverse) {
-            SmartDashboard.putString("Loader", "Reverse");
+            SmartDashboard.putString("Loader", "Retract");
         } else {
             SmartDashboard.putString("Loader", "Off");
         }

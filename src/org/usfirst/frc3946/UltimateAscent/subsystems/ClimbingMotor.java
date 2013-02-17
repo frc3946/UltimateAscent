@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 
 /**
@@ -22,11 +24,15 @@ public class ClimbingMotor extends PIDSubsystem {
 
     // Initialize your subsystem here
     Relay motor = new Relay(RobotMap.climbingMotor);
-    ADXL345_I2C balancer = new ADXL345_I2C(1,ADXL345_I2C.DataFormat_Range.k8G);
+    ADXL345_I2C balancer;
     AnalogChannel currentSensor = new AnalogChannel(RobotMap.currentSensor);
+    
     public ClimbingMotor() {
         super("ClimbingMotor", Kp, Ki, Kd);
-
+        balancer = new ADXL345_I2C(1,ADXL345_I2C.DataFormat_Range.k16G);
+        LiveWindow.addActuator("ClimbingMotor", "Relay", motor);
+        LiveWindow.addSensor("ClimbingMotor", "CurrentSensor", currentSensor);
+        
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
@@ -42,7 +48,9 @@ public class ClimbingMotor extends PIDSubsystem {
         // Return your input value for the PID loop
         // e.g. a sensor, like a potentiometer:
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return balancer.getAcceleration(ADXL345_I2C.Axes.kY);
+        SmartDashboard.putNumber("Balancer", getYAccel());
+        SmartDashboard.putNumber("Current", currentSensor.getVoltage());
+        return getYAccel();
     }
     
     protected void usePIDOutput(double output) {
@@ -92,4 +100,13 @@ public class ClimbingMotor extends PIDSubsystem {
     public double getAmps(){
         return currentSensor.getVoltage()*15.7;
     }
+    
+       public double getYAccel(){
+           
+        ADXL345_I2C.AllAxes allAxes =   balancer.getAccelerations();
+        
+           
+        return allAxes.YAxis;
+    }
+    
 }

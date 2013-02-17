@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc3946.UltimateAscent.commands.Climb;
 import org.usfirst.frc3946.UltimateAscent.commands.ExtendClimbingPiston;
 import org.usfirst.frc3946.UltimateAscent.commands.FirePiston;
+import org.usfirst.frc3946.UltimateAscent.commands.LevelDuringClimb;
 import org.usfirst.frc3946.UltimateAscent.commands.LoadFrisbee;
 import org.usfirst.frc3946.UltimateAscent.commands.StartLaunchWheels;
 import org.usfirst.frc3946.UltimateAscent.commands.StopLaunchWheels;
@@ -67,7 +68,7 @@ public class OI {
         loadFrisbee.whileHeld(new LoadFrisbee());
         firePiston.whenPressed(new FirePiston());
         ExtendClimbingPiston.whenReleased(new ExtendClimbingPiston());
-        Climb.whenReleased(new Climb());
+        Climb.whenPressed(new LevelDuringClimb());
         
     }
     

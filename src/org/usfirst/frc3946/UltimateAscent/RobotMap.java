@@ -32,29 +32,33 @@ public class RobotMap {
     public static final int Climb = XboxController.ButtonType.kB.value;
  
     //Motors
-    public static final int leftJaguar = 1;
-    public static final int rightJaguar = 2;
-    public static final int frisbeeFirstWheel = 3;
-    public static final int frisbeeSecondWheel = 4;
+    public static final int leftJaguar = 1; //Blue
+    public static final int rightJaguar = 2; //Green
+    public static final int frisbeeFirstWheel = 3; //Yellow
+    public static final int frisbeeSecondWheel = 4; //Orange
     
     //Relays (Spikes)
     //public static final int liftSpike = 1;
-    public static final int compressorRelay = 1;
-    public static final int frisbeeLoader = 2;
-    public static final int climbingMotor = 3;
-    public static final int deflector = 4;
+    public static final int compressorRelay = 1; //Red
+    public static final int frisbeeLoader = 2; //Purple
+    public static final int climbingMotor = 3; //Grey
+    public static final int deflector = 4; //Brown
     
     //Solenoids
-    public static final int firePistonRetract = 1; //Black Hose
-    public static final int firePistonExtend = 2; //White Hose
-    public static final int pistonRetract = 3; //Black Hose
-    public static final int pistonExtend = 4; //White Hose
+    public static final int pistonRetract1 = 1; //Red, Black Hose 
+    public static final int pistonExtend1 = 2; //Yellow, White Hose
+    public static final int pistonRetract2 = 3; //Orange, Black Hose 
+    public static final int pistonExtend2 = 4; //Green, White Hose
+    public static final int firePistonRetract = 5; //Purple, Black Hose 
+    public static final int firePistonExtend = 6; //Blue, White Hose
     
     //Digital
-    public static final int pressureSwitch = 1;
+    public static final int pressureSwitch = 1; //White
+    public static final int accelerometer = 2;
     
     //Analog
+    public static final int currentSensor = 1; //Black
     
-    public static final int currentSensor = 1;
-    
+    public static int offset = 0;
+    public static int distance = 0;
 }

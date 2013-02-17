@@ -18,6 +18,8 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     //public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+    
+    public static RaspberryPi raspberryPi = new RaspberryPi();
     public static Compressor compressor = new Compressor();
     public static DriveTrain driveTrain = new DriveTrain();
     public static FrisbeeLoader frisbeeLoader= new FrisbeeLoader();
@@ -36,11 +38,15 @@ public abstract class CommandBase extends Command {
 
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(exampleSubsystem);
+        SmartDashboard.putData(raspberryPi);
         SmartDashboard.putData(compressor);
         SmartDashboard.putData(driveTrain);
         SmartDashboard.putData(frisbeeLoader);
         SmartDashboard.putData(firePiston);
         SmartDashboard.putData(frisbeeWheels);
+        SmartDashboard.putData(climbingPiston);
+        SmartDashboard.putData(climbingMotor);
+        SmartDashboard.putData(deflector);
         
         //SmartDashboard Buttons
         //SmartDashboard.putData("ExampleSubsystem", new ExampleSubsystem());

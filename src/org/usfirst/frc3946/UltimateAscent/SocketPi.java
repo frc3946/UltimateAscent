@@ -17,7 +17,7 @@ import javax.microedition.io.SocketConnection;
  * @author Gustave Michel
  * A TCP Socket Client
  */
-public class RaspberryPi {
+public class SocketPi {
     //Defaults
         public static final String defaultIp = "10.39.46.12";
         public static final String defaultPort = "10000";
@@ -43,7 +43,7 @@ public class RaspberryPi {
     /**
      * Constructor using Defaults
      */
-    public RaspberryPi() {
+    public SocketPi() {
         this(defaultIp, defaultPort, defaultBufferSize, defaultDelimiter);
     }
     
@@ -52,11 +52,11 @@ public class RaspberryPi {
      * @param ip Address of Server "xxx.xxx.xxx.xxx"
      * @param port of Server "XXXXX"
      */
-    public RaspberryPi(String ip, String port, int bufferSize, char delimiter) {
+    public SocketPi(String ip, String port, int bufferSize, char delimiter) {
         try {
             connect(ip, port, bufferSize, delimiter);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Failed to Connect, SocketPi Constructor");
         }
     }
     
