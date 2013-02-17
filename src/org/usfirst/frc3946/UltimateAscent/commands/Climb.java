@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
- * @author 10374778
+ * @author OpalStone
  */
 public class Climb extends CommandGroup {
     
