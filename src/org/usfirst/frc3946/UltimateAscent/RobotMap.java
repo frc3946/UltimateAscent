@@ -30,6 +30,7 @@ public class RobotMap {
     public static final int firePiston = XboxController.ButtonType.kX.value;
     public static final int ExtendClimbingPiston = XboxController.ButtonType.kA.value;
     public static final int Climb = XboxController.ButtonType.kB.value;
+    public static final int StopMotors = XboxController.ButtonType.kSelect.value;
  
     //Motors
     public static final int leftJaguar = 1; //Blue
