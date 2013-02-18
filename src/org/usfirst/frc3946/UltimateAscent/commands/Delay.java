@@ -6,31 +6,23 @@ package org.usfirst.frc3946.UltimateAscent.commands;
 
 /**
  *
- * @author Makaylah
+ * @author Jeff
  */
-public class StartLaunchWheels extends CommandBase {
+public class Delay extends CommandBase {
     
-    public StartLaunchWheels() {
+    public Delay(double timeout) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(frisbeeWheels);
+        setTimeout(timeout);
+        
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        //if the frisbee wheels are stopped
-        //then we need some warmup time before
-        //next command is allowed to run
-        if(!frisbeeWheels.isRunning()) {
-            setTimeout(2.2);
-        } else {
-            setTimeout(0);
-        }
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        frisbeeWheels.set(0.5, -.9);
     }
 
     // Make this return true when this Command no longer needs to run execute()

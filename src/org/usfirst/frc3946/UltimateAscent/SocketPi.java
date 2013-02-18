@@ -82,15 +82,21 @@ public class SocketPi {
         this.delimiter = delimiter;
         beenConnected = true;
         url = "socket://" + ip + ":" + port; //Store URL of Connection
-
-        client = (SocketConnection) Connector.open(url); //Setup input and output through client SocketConnection
-        is = client.openInputStream();
-        os = client.openOutputStream();
-        if(true) {
-            System.out.println("Connected to: "+client.getAddress() + ":" + client.getPort());
+        System.out.println("Connecting to PI...");
+        client = (SocketConnection) Connector.open(url, Connector.READ_WRITE, true); //Setup input and output through client SocketConnection
+        try{            
+            is = client.openInputStream();
+            os = client.openOutputStream();
+            if(true) {
+                System.out.println("Connected to: "+client.getAddress() + ":" + client.getPort());
+            }
+            connected = true;
         }
-        connected = true;
-        return;
+        catch (Exception ex){
+             connected = false;
+        }
+        
+        
     }
     
     /**
@@ -102,7 +108,7 @@ public class SocketPi {
         client.close();
         System.out.println("Disconnected");
         connected = false;
-        return;
+        
     }
     
     /**
@@ -110,6 +116,16 @@ public class SocketPi {
      * @return if 
      */
     public boolean isConnected() {
+        
+        //need to actually test the connection 
+        //to figure out if we're connected or not
+        try{
+            os.write('\n'); //request Data
+        }
+        catch(Exception ex){
+            connected = false;
+        }
+        
         return connected;
     }
     

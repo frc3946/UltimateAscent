@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc3946.UltimateAscent.commands.Climb;
 import org.usfirst.frc3946.UltimateAscent.commands.ExtendClimbingPiston;
 import org.usfirst.frc3946.UltimateAscent.commands.FirePiston;
+import org.usfirst.frc3946.UltimateAscent.commands.LaunchFrisbee;
 import org.usfirst.frc3946.UltimateAscent.commands.LevelDuringClimb;
 import org.usfirst.frc3946.UltimateAscent.commands.LoadFrisbee;
 import org.usfirst.frc3946.UltimateAscent.commands.StartLaunchWheels;
@@ -54,6 +55,7 @@ public class OI {
     private Button firePiston;
     private Button ExtendClimbingPiston;
     private Button Climb;
+    private Button StopMotors;
     
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
@@ -62,9 +64,10 @@ public class OI {
         firePiston = new JoystickButton(xbox, RobotMap.firePiston);
         ExtendClimbingPiston = new JoystickButton (xbox, RobotMap.ExtendClimbingPiston);
         Climb = new JoystickButton(xbox, RobotMap.Climb);
+        StopMotors = new JoystickButton(xbox, RobotMap.StopMotors);
         
-        launchFrisbee.whileHeld(new StartLaunchWheels());
-        launchFrisbee.whenReleased(new StopLaunchWheels());
+        launchFrisbee.whenPressed(new LaunchFrisbee());
+        StopMotors.whenPressed(new StopLaunchWheels());
         loadFrisbee.whileHeld(new LoadFrisbee());
         firePiston.whenPressed(new FirePiston());
         ExtendClimbingPiston.whenReleased(new ExtendClimbingPiston());

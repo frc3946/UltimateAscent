@@ -90,6 +90,7 @@ public class AutoAim extends CommandBase {
                     
                     errorAccum = 1;
                 } catch (IOException ex) {
+                    driveTrain.tankDrive(0, 0);
                     errorAccum++;
                     if(errorAccum >= 5) { //Disconnect after 5 consecutive errors
                         try {
@@ -101,6 +102,8 @@ public class AutoAim extends CommandBase {
                 }
             }
         } else {
+            
+            driveTrain.tankDrive(0, 0);
             if(currentTime - previousConnectTime > connectInterum) {
                 previousConnectTime = currentTime;
                 try {
@@ -119,10 +122,12 @@ public class AutoAim extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        driveTrain.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        driveTrain.tankDrive(0, 0);
     }
 }

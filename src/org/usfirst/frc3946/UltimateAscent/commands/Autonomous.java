@@ -23,7 +23,21 @@ public class Autonomous extends CommandGroup {
         // e.g. addParallel(new Command1());
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
-
+        
+        //shoot four frisbee with a delay in between
+        double frisbeeShotDelay = 2.0;
+        
+        addParallel(new LaunchFrisbee());
+        addSequential(new Delay(frisbeeShotDelay));
+        
+        addParallel(new LaunchFrisbee());
+        addSequential(new Delay(frisbeeShotDelay));
+        
+        addParallel(new LaunchFrisbee());
+        addSequential(new Delay(frisbeeShotDelay));
+        
+        addParallel(new LaunchFrisbee());
+        addSequential(new Delay(frisbeeShotDelay));
         // A command group will require all of the subsystems that each member
         // would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,
