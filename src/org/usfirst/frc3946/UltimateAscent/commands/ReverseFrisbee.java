@@ -4,33 +4,27 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
+import edu.wpi.first.wpilibj.Relay;
+
 /**
  *
- * @author Makaylah
+ * @author Jeff
  */
-public class StartLaunchWheels extends CommandBase {
+public class ReverseFrisbee extends CommandBase {
     
-    public StartLaunchWheels() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        requires(frisbeeWheels);
+    public ReverseFrisbee() {
+        requires(frisbeeLoader);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        //if the frisbee wheels are stopped
-        //then we need some warmup time before
-        //next command is allowed to run
-        if(!frisbeeWheels.isRunning()) {
-            setTimeout(4.5);
-        } else {
-            setTimeout(0);
-        }
+        frisbeeLoader.set(Relay.Value.kForward);
+        setTimeout(.2);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        frisbeeWheels.set(0.47, 1.00);
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,6 +34,7 @@ public class StartLaunchWheels extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        frisbeeLoader.set(Relay.Value.kOff);
     }
 
     // Called when another command which requires one or more of the same

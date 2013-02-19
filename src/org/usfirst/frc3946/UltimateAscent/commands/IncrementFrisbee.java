@@ -16,12 +16,13 @@ public class IncrementFrisbee extends CommandBase {
     public IncrementFrisbee() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(frisbeeLoader);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         frisbeeLoader.set(Relay.Value.kReverse);
-        setTimeout(.7);
+        setTimeout(1.2);
     }
 
     // Called repeatedly when this Command is scheduled to run

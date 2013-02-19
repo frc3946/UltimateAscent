@@ -3,14 +3,7 @@ package org.usfirst.frc3946.UltimateAscent;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc3946.UltimateAscent.commands.Climb;
-import org.usfirst.frc3946.UltimateAscent.commands.ExtendClimbingPiston;
-import org.usfirst.frc3946.UltimateAscent.commands.FirePiston;
-import org.usfirst.frc3946.UltimateAscent.commands.LaunchFrisbee;
-import org.usfirst.frc3946.UltimateAscent.commands.LevelDuringClimb;
-import org.usfirst.frc3946.UltimateAscent.commands.LoadFrisbee;
-import org.usfirst.frc3946.UltimateAscent.commands.StartLaunchWheels;
-import org.usfirst.frc3946.UltimateAscent.commands.StopLaunchWheels;
+import org.usfirst.frc3946.UltimateAscent.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator

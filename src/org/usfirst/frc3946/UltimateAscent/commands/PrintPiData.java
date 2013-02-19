@@ -54,7 +54,7 @@ public class PrintPiData extends CommandBase {
                         return; //Check for No Data
                     }
                     String[] tokenData = raspberryPi.getPi().tokenizeData(rawData); //Tokenize Raw Input
-                    if(tokenData.length < 1) {
+                    if(tokenData.length < 4) {
                         return; //Check for No Data
                     }
                     if(tokenData[0].equals("n")) {

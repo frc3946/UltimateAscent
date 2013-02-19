@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
+import org.usfirst.frc3946.UltimateAscent.commands.StopLaunchWheels;
 
 /**
  *
@@ -22,11 +23,12 @@ public class FrisbeeWheels extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new StopLaunchWheels());
     }
     
     public void set(double firstSpeed, double secondSpeed) {
         firstWheel.set(firstSpeed);
-        secondWheel.set(-1*secondSpeed);
+        secondWheel.set(secondSpeed);
     }
     
     public FrisbeeWheels() {

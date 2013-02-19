@@ -29,15 +29,17 @@ public class LaunchFrisbee extends CommandGroup {
         // would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
-        // arm.
+        // arm.'
+        System.out.println("LaunchFrisbee");
         addSequential(new StartLaunchWheels());
         //for(int i = 0; i < 3; i++) {
         addSequential(new FirePiston());
+        addSequential(new ReverseFrisbee());
         addSequential(new IncrementFrisbee());
         //}
         //addSequential(new LoadFrisbee(), 1.5);
         //addSequential(new FirePiston());
-        addParallel(new StopLaunchWheels());
+        //addParallel(new StopLaunchWheels());
         //addSequential(new LoadFrisbee(), 1.5);
     }
 }
