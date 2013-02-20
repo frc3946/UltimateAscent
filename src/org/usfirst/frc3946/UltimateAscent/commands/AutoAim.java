@@ -18,7 +18,11 @@ public class AutoAim extends CommandBase {
     private double checkInterum = .4;
     private double previousConnectTime = 0;
     private double connectInterum = 1;
-    
+    private boolean robotIsCentered = false;
+    private boolean robotIsOffset = false;
+    private double left = 0;
+    private double right = 0;
+            
     private int center;
     private int distance;
     private int errorAccum = 0;
@@ -27,11 +31,13 @@ public class AutoAim extends CommandBase {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(driveTrain);
-        requires(raspberryPi);
+        //requires(raspberryPi);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        left = 0;
+        right = 0;
         if(!raspberryPi.getPi().isConnected()) {
             try {
                 raspberryPi.getPi().connect();
@@ -43,8 +49,12 @@ public class AutoAim extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        currentTime = Timer.getFPGATimestamp();
         
+        driveTrain.tankDrive(left, right);
+        System.out.println("Left: " + String.valueOf(left));
+        System.out.println("Right: " + String.valueOf(right));
+        currentTime = Timer.getFPGATimestamp();
+       
         if(raspberryPi.getPi().isConnected()) {
             if(currentTime - previousCheckTime > checkInterum) {
                 previousCheckTime = currentTime;
@@ -54,7 +64,7 @@ public class AutoAim extends CommandBase {
                         return; //Check for No Data
                     }
                     String[] tokenData = raspberryPi.getPi().tokenizeData(rawData); //Tokenize Raw Input
-                    if(tokenData.length < 1) {
+                    if(tokenData.length < 4) {
                         return; //Check for No Data
                     }
                     if(tokenData[0].equals("n")) {
@@ -73,24 +83,45 @@ public class AutoAim extends CommandBase {
                     SmartDashboard.putNumber("Offset", center); //Print Data to SmartDashboard
                     SmartDashboard.putNumber("Distance", distance);
                     
+                    robotIsCentered = false;
                     if(center >= 20) { //Turning
-                        driveTrain.tankDrive(.2, 0);
+                        driveTrain.tankDrive(-1, 1);
+                        left = -1;
+                        right = 1;
                     } else if(center <= -20) {
-                        driveTrain.tankDrive(0, .2);
+                        driveTrain.tankDrive(1, -1);
+                        left = 1;
+                        right = -1;
                     } else {
+                        robotIsCentered = true;
                         driveTrain.tankDrive(0, 0);
+                        left = 0;
+                        right = 0;
                     }
                     
+                    if (robotIsCentered == true) {
+                        
                     
-                    if(distance >= 18) { //Distance
-                        driveTrain.tankDrive(.2,.2);
-                    } else if(distance <= 14) {
-                        driveTrain.tankDrive(-.2,-.2);
+                        if(distance >= 22500) { //Distance
+                            driveTrain.tankDrive(1,1);
+                            left = 1;
+                            right = 1;
+                        } else if(distance <= 21500) {
+                            driveTrain.tankDrive(-1,-1);
+                            left = -1;
+                            right = -1;
+                        } else {
+                            driveTrain.tankDrive(0, 0);
+                            left = 0;
+                            right = 0;
+                        }
                     }
                     
                     errorAccum = 1;
                 } catch (IOException ex) {
                     driveTrain.tankDrive(0, 0);
+                    left = 0;
+                    right = 0;
                     errorAccum++;
                     if(errorAccum >= 5) { //Disconnect after 5 consecutive errors
                         try {
@@ -103,7 +134,7 @@ public class AutoAim extends CommandBase {
             }
         } else {
             
-            driveTrain.tankDrive(0, 0);
+           // driveTrain.tankDrive(0, 0);
             if(currentTime - previousConnectTime > connectInterum) {
                 previousConnectTime = currentTime;
                 try {
@@ -113,6 +144,7 @@ public class AutoAim extends CommandBase {
                 }
             }
         }
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()

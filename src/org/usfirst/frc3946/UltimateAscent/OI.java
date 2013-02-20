@@ -49,6 +49,7 @@ public class OI {
     private Button ExtendClimbingPiston;
     private Button Climb;
     private Button StopMotors;
+    private Button AutoAim;
     
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
@@ -58,9 +59,11 @@ public class OI {
         ExtendClimbingPiston = new JoystickButton (xbox, RobotMap.ExtendClimbingPiston);
         Climb = new JoystickButton(xbox, RobotMap.Climb);
         StopMotors = new JoystickButton(xbox, RobotMap.StopMotors);
+        AutoAim = new JoystickButton(xbox, RobotMap.AutoAim);
         
+        AutoAim.whileHeld(new AutoAim());
         launchFrisbee.whenPressed(new LaunchFrisbee());
-        StopMotors.whenPressed(new StopLaunchWheels());
+        StopMotors.whenPressed(new StopLaunchWheels(0));
         loadFrisbee.whileHeld(new LoadFrisbee());
         firePiston.whenPressed(new FirePiston());
         ExtendClimbingPiston.whenReleased(new ExtendClimbingPiston());
