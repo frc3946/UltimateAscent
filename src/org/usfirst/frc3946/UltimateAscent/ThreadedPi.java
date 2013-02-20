@@ -16,7 +16,7 @@ import javax.microedition.io.SocketConnection;
  *
  * @author Gustave Michel
  */
-public class RaspberryPi {
+public class ThreadedPi {
     
     private String url = "Socket://10.39.46.12:10000";
     private int bufferSize = 64;
@@ -62,12 +62,13 @@ public class RaspberryPi {
     }
     
     private class RaspberryPiThread extends Thread {
-        RaspberryPi m_raspberryPi;
+        ThreadedPi m_raspberryPi;
         public int distance;
         public int offset;
         public double time;
+        private boolean report;
     
-        public RaspberryPiThread(RaspberryPi raspberryPi) {
+        public RaspberryPiThread(ThreadedPi raspberryPi) {
             m_raspberryPi = raspberryPi;
         }
         
@@ -75,28 +76,28 @@ public class RaspberryPi {
             while(m_run) {
                 if(m_raspberryPi.isEnabled()) {
                     if(m_raspberryPi.isConnected()) {
+                        report = true;
                         try {
                             String[] data = m_raspberryPi.tokenizeData(m_raspberryPi.getRawData());
                             time = Timer.getFPGATimestamp();
                             if(data.length < 4) {
-                                distance = -999;
-                                offset = -999;
+                                report = false;
                             } else {
                                 try {
                                     distance = Integer.parseInt(data[3]);
                                     offset = Integer.parseInt(data[0]);
                                 } catch(NumberFormatException ex) {
-                                    distance = -999;
-                                    offset = -999;
+                                    report = false;
                                 }
                             }
                         } catch (IOException ex) {
-                            distance = -999;
-                            offset = -999;
+                            report = false;
                         }
-                        DataKeeper.setDistance(distance);
-                        DataKeeper.setOffset(offset);
-                        DataKeeper.setTime(time);
+                        if(report) {
+                            DataKeeper.setDistance(distance);
+                            DataKeeper.setOffset(offset);
+                            DataKeeper.setTime(time);
+                        }
                     } else {
                         try {
                             m_raspberryPi.connect();
@@ -110,10 +111,9 @@ public class RaspberryPi {
         }
     }
     
-    public RaspberryPi() {
-        m_enabled = true;
+    public ThreadedPi() {
+        m_enabled = false;
         m_thread = new RaspberryPiThread(this);
-        m_thread.start();
     }
     
     public void connect() throws IOException {
