@@ -71,7 +71,7 @@ public class PrintPiData extends CommandBase {
                         distance = -999;
                     }
                     SmartDashboard.putNumber("Offset", center); //Print Data to SmartDashboard
-                    SmartDashboard.putNumber("Distance", distance);
+                    SmartDashboard.putNumber("Distance", (double) distance/1000);
                     
                     RobotMap.offset = center;
                     RobotMap.distance = this.distance;
