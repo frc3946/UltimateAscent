@@ -116,21 +116,21 @@ public class ThreadedPi {
         m_thread = new RaspberryPiThread(this);
     }
     
-    public void connect() throws IOException {
+    public synchronized void connect() throws IOException {
         m_socket = (SocketConnection) Connector.open(url, Connector.READ_WRITE, false);
         m_is = m_socket.openInputStream();
         m_os = m_socket.openOutputStream();
         m_connected = true;
     }
     
-    public void disconnect() throws IOException {
+    public synchronized void disconnect() throws IOException {
         m_socket.close();
         m_is.close();
         m_os.close();
         m_connected = false;
     }
     
-    public boolean isConnected() {
+    public synchronized boolean isConnected() {
         //need to actually test the connection 
         //to figure out if we're connected or not
         try{
@@ -143,7 +143,7 @@ public class ThreadedPi {
         return m_connected;
     }
     
-    public boolean isEnabled() {
+    public synchronized boolean isEnabled() {
         return m_enabled;
     }
     
@@ -158,15 +158,15 @@ public class ThreadedPi {
     public double getTime() {
         return DataKeeper.getTime();
     }
-    public void start() {
+    public synchronized void start() {
         m_enabled = true;
     }
     
-    public void stop() {
+    public synchronized void stop() {
         m_enabled = false;
     }
     
-    public String getRawData() throws IOException {
+    public synchronized String getRawData() throws IOException {
         byte[] input;
         
         if (m_connected) {
@@ -204,7 +204,7 @@ public class ThreadedPi {
      * @param input String to be tokenized
      * @return String Array of Tokenized Input String
      */
-    public String[] tokenizeData(String input) {
+    public synchronized String[] tokenizeData(String input) {
         StringTokenizer tokenizer = new StringTokenizer(input, String.valueOf(delimiter));
         String output[] = new String[tokenizer.countTokens()];
         

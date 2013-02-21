@@ -33,6 +33,13 @@ public class ThreadedberryPi extends Subsystem {
         raspberryPi.stop();
     }
     
+    public boolean isEnabled() {
+        return raspberryPi.isEnabled();
+    }
+    
+    public boolean isConnected() {
+        return raspberryPi.isConnected();
+    }
     /**
      * Get Offset from center from Pi
      * @return Offset from Center
