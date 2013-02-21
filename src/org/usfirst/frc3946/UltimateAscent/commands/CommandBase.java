@@ -20,6 +20,7 @@ public abstract class CommandBase extends Command {
     //public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
     
     public static RaspberryPi raspberryPi = new RaspberryPi();
+    public static ThreadedberryPi threadedberryPi = new ThreadedberryPi();
     public static Compressor compressor = new Compressor();
     public static DriveTrain driveTrain = new DriveTrain();
     public static FrisbeeLoader frisbeeLoader= new FrisbeeLoader();
