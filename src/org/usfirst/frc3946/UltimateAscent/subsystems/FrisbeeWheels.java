@@ -31,18 +31,18 @@ public class FrisbeeWheels extends Subsystem {
         secondWheel.set(secondSpeed);
     }
     
-    public FrisbeeWheels() {
-        super();
-        LiveWindow.addActuator("FrisbeeWheels", "FirstWheel", firstWheel);
-        LiveWindow.addActuator("FrisbeeWheels", "SecondWheel", secondWheel);
-        System.out.println(this.getClass().getName()+" Initialized");
-    }
-    
     public boolean isRunning() {
         if(firstWheel.getSpeed() > 0) {
             return true;
         } else {
             return false;
         }
+    }
+        
+    public FrisbeeWheels() {
+        super();
+        LiveWindow.addActuator("FrisbeeWheels", "FirstWheel", firstWheel);
+        LiveWindow.addActuator("FrisbeeWheels", "SecondWheel", secondWheel);
+        System.out.println(this.getClass().getName()+" Initialized");
     }
 }

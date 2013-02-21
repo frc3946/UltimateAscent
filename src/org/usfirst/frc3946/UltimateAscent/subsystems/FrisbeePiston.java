@@ -18,6 +18,8 @@ public class FrisbeePiston extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     private DoubleSolenoid piston = new DoubleSolenoid(RobotMap.firePistonRetract, RobotMap.firePistonExtend);
+    public DoubleSolenoid.Value extend = DoubleSolenoid.Value.kForward;
+    public DoubleSolenoid.Value retract = DoubleSolenoid.Value.kReverse;
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -25,18 +27,18 @@ public class FrisbeePiston extends Subsystem {
     }
     
     public void extend(){
-        set(DoubleSolenoid.Value.kForward);
+        set(extend);
     }
     
     public void retract(){
-        set(DoubleSolenoid.Value.kReverse);
+        set(retract);
     }
      
     public void set(DoubleSolenoid.Value value) {
         piston.set(value);
-        if(value == DoubleSolenoid.Value.kForward) {
+        if(value == extend) {
             SmartDashboard.putString("Loader", "Extend");
-        } else if(value == DoubleSolenoid.Value.kReverse) {
+        } else if(value == retract) {
             SmartDashboard.putString("Loader", "Retract");
         } else {
             SmartDashboard.putString("Loader", "Off");

@@ -6,7 +6,7 @@ package org.usfirst.frc3946.UltimateAscent.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc3946.UltimateAscent.SocketPi;
-import org.usfirst.frc3946.UltimateAscent.commands.PrintPiData;
+//import org.usfirst.frc3946.UltimateAscent.commands.PrintPiData;
 
 /**
  *
@@ -20,7 +20,7 @@ public class RaspberryPi extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-        //setDefaultCommand(new PrintPiData());
+//        setDefaultCommand(new PrintPiData());
     }
     public SocketPi getPi() {
         return raspberryPi;
@@ -28,7 +28,7 @@ public class RaspberryPi extends Subsystem {
     
     public RaspberryPi() {
         super();
-        //raspberryPi = new SocketPi();
+//        raspberryPi = new SocketPi();
         System.out.println(this.getClass().getName()+" Initialized");
     }
 }

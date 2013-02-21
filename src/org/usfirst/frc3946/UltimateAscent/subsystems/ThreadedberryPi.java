@@ -81,6 +81,7 @@ public class ThreadedberryPi extends Subsystem {
      * Constructor, starts Pi Thread
      */
     public ThreadedberryPi() {
+        super();
         raspberryPi = new ThreadedPi();
         start();
         System.out.println(this.getClass().getName()+" Initialized");
