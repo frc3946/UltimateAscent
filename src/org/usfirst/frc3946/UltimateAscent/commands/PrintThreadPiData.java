@@ -29,7 +29,7 @@ public class PrintThreadPiData extends CommandBase {
         if(threadedberryPi.getTime() > lastTime) {
             lastTime = threadedberryPi.getTime();
             SmartDashboard.putNumber("Offset", threadedberryPi.getOffset()); //Print Data to SmartDashboard
-            SmartDashboard.putNumber("Distance", (double) threadedberryPi.getDistance()/1000);
+            SmartDashboard.putNumber("Distance", (double) threadedberryPi.getDistance()/1000); //Convert from Millifeet to Feet
         }
     }
 
