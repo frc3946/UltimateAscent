@@ -149,6 +149,7 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @param port USB Port on DriverStation
      */
     public XboxController(int port) {
+        super();
         m_port = port;
         m_ds = DriverStation.getInstance();
     }

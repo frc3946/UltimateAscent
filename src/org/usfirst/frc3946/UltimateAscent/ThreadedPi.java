@@ -74,17 +74,17 @@ public class ThreadedPi {
         
         public void run() {
             while(m_run) {
-                if(m_raspberryPi.isEnabled()) {
+                if(m_raspberryPi.isEnabled()) { //Checks for Thread to run
                     if(m_raspberryPi.isConnected()) {
                         report = true;
                         try {
-                            String[] data = m_raspberryPi.tokenizeData(m_raspberryPi.getRawData());
+                            String[] data = m_raspberryPi.tokenizeData(m_raspberryPi.getRawData()); //Get and examine Data
                             time = Timer.getFPGATimestamp();
-                            if(data.length < 4) {
+                            if(data.length < 4) { //Error Check
                                 report = false;
                             } else {
                                 try {
-                                    distance = Integer.parseInt(data[3]);
+                                    distance = Integer.parseInt(data[3]); //Get data
                                     offset = Integer.parseInt(data[0]);
                                 } catch(NumberFormatException ex) {
                                     report = false;
@@ -93,7 +93,7 @@ public class ThreadedPi {
                         } catch (IOException ex) {
                             report = false;
                         }
-                        if(report) {
+                        if(report) { //Store Data in DataKeeper
                             DataKeeper.setDistance(distance);
                             DataKeeper.setOffset(offset);
                             DataKeeper.setTime(time);
@@ -105,7 +105,7 @@ public class ThreadedPi {
                     }
                 }
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(500); //Wait half second before getting Data again
                 } catch(InterruptedException ex) {}
             }
         }
@@ -166,6 +166,11 @@ public class ThreadedPi {
         m_enabled = false;
     }
     
+    /**
+     * Requests data from RaspberryPi
+     * @return String returned from RaspberryPi
+     * @throws IOException 
+     */
     public synchronized String getRawData() throws IOException {
         byte[] input;
         
