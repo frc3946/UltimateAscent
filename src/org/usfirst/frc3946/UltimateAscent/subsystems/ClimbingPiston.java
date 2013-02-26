@@ -17,6 +17,7 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
 public class ClimbingPiston extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    //TODO Rewrite to use two seprate controls.
     private DoubleSolenoid piston1 = new DoubleSolenoid(RobotMap.pistonRetract1, RobotMap.pistonExtend1);
     private DoubleSolenoid piston2 = new DoubleSolenoid(RobotMap.pistonRetract2, RobotMap.pistonExtend2);
                
