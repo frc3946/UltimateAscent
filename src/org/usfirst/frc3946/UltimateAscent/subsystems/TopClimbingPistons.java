@@ -14,12 +14,12 @@ import org.usfirst.frc3946.UltimateAscent.RobotMap;
  *
  * @author 10482352
  */
-public class ClimbingPiston extends Subsystem {
+public class TopClimbingPistons extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     //TODO Rewrite to use two seprate controls.
-    private DoubleSolenoid piston1 = new DoubleSolenoid(RobotMap.pistonRetract1, RobotMap.pistonExtend1);
-    private DoubleSolenoid piston2 = new DoubleSolenoid(RobotMap.pistonRetract2, RobotMap.pistonExtend2);
+    private DoubleSolenoid piston = new DoubleSolenoid(RobotMap.topPistonRetract, RobotMap.topPistonExtend);
+    
                
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -39,8 +39,7 @@ public class ClimbingPiston extends Subsystem {
     }
     
     public void set(DoubleSolenoid.Value value) {
-        piston1.set(value);
-        piston2.set(value);
+        piston.set(value);
         if(value == DoubleSolenoid.Value.kForward) {
             SmartDashboard.putString("Loader", "Extend");
         } else if(value == DoubleSolenoid.Value.kReverse) {
@@ -50,9 +49,9 @@ public class ClimbingPiston extends Subsystem {
         }
     }
     
-    public ClimbingPiston() {
+    public TopClimbingPistons() {
         super();
-        LiveWindow.addActuator("ClimbPiston", "ClimbPiston", piston1);
+        LiveWindow.addActuator("ClimbPiston", "ClimbPiston", piston);
         System.out.println(this.getClass().getName()+" Initialized");
     }
 }

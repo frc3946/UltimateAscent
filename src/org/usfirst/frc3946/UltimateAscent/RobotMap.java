@@ -47,10 +47,10 @@ public class RobotMap {
     public static final int deflector = 4; //Brown
     
     //Solenoids
-    public static final int pistonRetract1 = 1; //Red, Black Hose 
-    public static final int pistonExtend1 = 2; //Yellow, White Hose
-    public static final int pistonRetract2 = 3; //Orange, Black Hose 
-    public static final int pistonExtend2 = 4; //Green, White Hose
+    public static final int topPistonRetract = 1; //Red, Black Hose 
+    public static final int topPistonExtend = 2; //Yellow, White Hose
+    public static final int bottomPistonRetract = 3; //Orange, Black Hose 
+    public static final int bottomPistonExtend = 4; //Green, White Hose
     public static final int firePistonRetract = 5; //Purple, Black Hose 
     public static final int firePistonExtend = 6; //Blue, White Hose
     

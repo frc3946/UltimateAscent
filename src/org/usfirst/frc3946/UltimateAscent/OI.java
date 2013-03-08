@@ -46,7 +46,8 @@ public class OI {
     private Button launchFrisbee;
     private Button loadFrisbee;
     private Button firePiston;
-    private Button ExtendClimbingPiston;
+    private Button TopClimbingPiston;
+    private Button BottomClimbingPiston;
     private Button Climb;
     private Button StopMotors;
     private Button AutoAim;
@@ -56,7 +57,8 @@ public class OI {
         launchFrisbee = new JoystickButton(xbox, RobotMap.launchFrisbee);
         loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
         firePiston = new JoystickButton(xbox, RobotMap.firePiston);
-        ExtendClimbingPiston = new JoystickButton (xbox, RobotMap.ExtendClimbingPiston);
+        TopClimbingPiston = new JoystickButton (xbox, RobotMap.ExtendClimbingPiston);
+        BottomClimbingPiston = new JoystickButton (xbox, RobotMap.bottomPistonExtend);
         Climb = new JoystickButton(xbox, RobotMap.Climb);
         StopMotors = new JoystickButton(xbox, RobotMap.StopMotors);
         AutoAim = new JoystickButton(xbox, RobotMap.AutoAim);
@@ -66,7 +68,10 @@ public class OI {
         StopMotors.whenPressed(new StopLaunchWheels(0));
         loadFrisbee.whileHeld(new LoadFrisbee());
         firePiston.whenPressed(new FirePiston());
-        ExtendClimbingPiston.whenReleased(new ExtendClimbingPiston());
+        TopClimbingPiston.whileHeld(new ExtendTopClimbingPiston());
+        TopClimbingPiston.whenReleased(new RetractTopClimbingPiston());
+        BottomClimbingPiston.whileHeld(new ExtendBottomClimbingPiston());
+        BottomClimbingPiston.whenReleased(new RetractBottomPiston());
         Climb.whenPressed(new LevelDuringClimb());
         
     }

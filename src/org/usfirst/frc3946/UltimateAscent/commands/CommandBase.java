@@ -26,11 +26,11 @@ public abstract class CommandBase extends Command {
     public static FrisbeeLoader frisbeeLoader= new FrisbeeLoader();
     public static FrisbeePiston firePiston = new FrisbeePiston();
     public static FrisbeeWheels frisbeeWheels = new FrisbeeWheels();
-    public static ClimbingPiston climbingPiston = new ClimbingPiston();
+    public static TopClimbingPistons topClimbingPiston = new TopClimbingPistons();
+    public static BottomClimbingPistons bottomClimbingPiston = new BottomClimbingPistons();
     public static ClimbingMotor climbingMotor = new ClimbingMotor();
     public static BumperDeflector deflector = new BumperDeflector();
-    public static void init() {
-        // This MUST be here. If the OI creates Commands (which it very likely
+    public static void init() {        // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
         // which commands extend), subsystems are not guaranteed to be
         // yet. Thus, their requires() statements may grab null pointers. Bad
@@ -45,7 +45,8 @@ public abstract class CommandBase extends Command {
         SmartDashboard.putData(frisbeeLoader);
         SmartDashboard.putData(firePiston);
         SmartDashboard.putData(frisbeeWheels);
-        SmartDashboard.putData(climbingPiston);
+        SmartDashboard.putData(topClimbingPiston);
+        SmartDashboard.putData(bottomClimbingPiston);
         SmartDashboard.putData(climbingMotor);
         SmartDashboard.putData(deflector);
         

@@ -8,34 +8,27 @@ package org.usfirst.frc3946.UltimateAscent.commands;
  *
  * @author 10374778
  */
-public class RetractClimbingPiston extends CommandBase {
+public class RetractTopClimbingPiston extends CommandBase {
     
-    public RetractClimbingPiston() {
+    public RetractTopClimbingPiston() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires (climbingPiston);
-        requires (climbingMotor);
+        requires (topClimbingPiston);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-       System.out.println("RetractClimbingPiston");
-       setTimeout(5);
-       climbingPiston.retract();
+       
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
+        topClimbingPiston.retract();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if (climbingMotor.IsTimeToAbort() == true){
-            climbingPiston.stop();
-            return true;
-        }
-        return isTimedOut();
+        return true;
     }
 
     // Called once after isFinished returns true
