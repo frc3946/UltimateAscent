@@ -36,15 +36,15 @@ public class RobotMap {
     //Motors
     public static final int leftJaguar = 1; //Blue
     public static final int rightJaguar = 2; //Green
-    public static final int frisbeeFirstWheel = 3; //Yellow
-    public static final int frisbeeSecondWheel = 4; //Orange
+    public static final int climbingMotor = 3; //Grey
+    public static final int frisbeeFirstWheel = 4; //Yellow
+    public static final int frisbeeSecondWheel = 5; //Orange
     
     //Relays (Spikes)
     //public static final int liftSpike = 1;
     public static final int compressorRelay = 1; //Red
     public static final int frisbeeLoader = 2; //Purple
-    public static final int climbingMotor = 3; //Grey
-    public static final int deflector = 4; //Brown
+    public static final int deflector = 3; //Brown
     
     //Solenoids
     public static final int topPistonRetract = 1; //Red, Black Hose 
