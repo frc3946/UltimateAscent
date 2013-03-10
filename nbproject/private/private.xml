@@ -14,5 +14,6 @@
         <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/OI.java</file>
         <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/Climb.java</file>
         <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/MoveClimbingMotor.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/ClimbingMotor.java</file>
     </open-files>
 </project-private>

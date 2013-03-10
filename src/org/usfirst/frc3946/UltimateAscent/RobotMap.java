@@ -56,7 +56,6 @@ public class RobotMap {
     
     //Digital
     public static final int pressureSwitch = 1; //White
-    public static final int accelerometer = 2;
     
     //Analog
     public static final int currentSensor = 1; //Black
