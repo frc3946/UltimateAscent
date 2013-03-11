@@ -84,7 +84,7 @@ public class XboxController extends GenericHID implements IInputOutput {
         private static final int kL_val = 5;
         private static final int kR_val = 6;
         private static final int kBack_val = 7;
-        private static final int kSelect_val = 8;
+        private static final int kStart_val = 8;
         private static final int kLeftStick_val = 9;
         private static final int kRightStick_val = 10;
         
@@ -135,7 +135,7 @@ public class XboxController extends GenericHID implements IInputOutput {
         /**
          * Button: Select
          */
-        public static final ButtonType kSelect = new ButtonType(kSelect_val);
+        public static final ButtonType kStart = new ButtonType(kStart_val);
         
         /**
          * Button: Start
@@ -161,9 +161,9 @@ public class XboxController extends GenericHID implements IInputOutput {
      */
     public double getX(Hand hand) {
         if(hand.value == Hand.kRight.value) {
-            return getRawAxis(AxisType.kLeftX.value);
-        } else if(hand.value == Hand.kLeft.value) {
             return getRawAxis(AxisType.kRightX.value);
+        } else if(hand.value == Hand.kLeft.value) {
+            return getRawAxis(AxisType.kLeftX.value);
         } else {
             return 0;
         }
@@ -176,9 +176,9 @@ public class XboxController extends GenericHID implements IInputOutput {
      */
     public double getY(Hand hand) {
         if(hand.value == Hand.kRight.value) {
-            return getRawAxis(AxisType.kLeftY.value);
-        } else if(hand.value == Hand.kLeft.value) {
             return getRawAxis(AxisType.kRightY.value);
+        } else if(hand.value == Hand.kLeft.value) {
+            return getRawAxis(AxisType.kLeftY.value);
         } else {
             return 0;
         }
@@ -302,8 +302,8 @@ public class XboxController extends GenericHID implements IInputOutput {
      * Get State of Select Button
      * @return State of button
      */
-    public boolean getSelect() {
-        return getRawButton(ButtonType.kSelect.value);
+    public boolean getStart() {
+        return getRawButton(ButtonType.kStart.value);
     }
     
     /**
