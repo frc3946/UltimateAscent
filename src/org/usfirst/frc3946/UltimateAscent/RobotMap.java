@@ -29,7 +29,9 @@ public class RobotMap {
     public static final int loadFrisbee = XboxController.ButtonType.kY.value;
     public static final int firePiston = XboxController.ButtonType.kX.value;
     public static final int ExtendClimbingPiston = XboxController.ButtonType.kA.value;
-    public static final int Climb = XboxController.ButtonType.kB.value;
+//    public static final int Climb = XboxController.ButtonType.kB.value;
+    public static final int pitchFore = XboxController.ButtonType.kR.value;
+    public static final int pitchAft = XboxController.ButtonType.kB.value;
     public static final int StopMotors = XboxController.ButtonType.kStart.value;
     public static final int AutoAim = XboxController.ButtonType.kL.value;
     

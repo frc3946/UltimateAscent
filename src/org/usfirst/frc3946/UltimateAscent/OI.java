@@ -48,7 +48,9 @@ public class OI {
     private Button firePiston;
     private Button TopClimbingPiston;
     private Button BottomClimbingPiston;
-    private Button Climb;
+//    private Button Climb;
+    private Button pitchFore;
+    private Button pitchAft;
     private Button StopMotors;
     private Button AutoAim;
     
@@ -59,7 +61,9 @@ public class OI {
         firePiston = new JoystickButton(xbox, RobotMap.firePiston);
         TopClimbingPiston = new JoystickButton (xbox, RobotMap.ExtendClimbingPiston);
         BottomClimbingPiston = new JoystickButton (xbox, RobotMap.bottomPistonExtend);
-        Climb = new JoystickButton(xbox, RobotMap.Climb);
+//        Climb = new JoystickButton(xbox, RobotMap.Climb);
+        pitchFore = new JoystickButton(xbox, RobotMap.pitchFore);
+        pitchAft = new JoystickButton(xbox, RobotMap.pitchAft);
         StopMotors = new JoystickButton(xbox, RobotMap.StopMotors);
         AutoAim = new JoystickButton(xbox, RobotMap.AutoAim);
         
@@ -72,8 +76,9 @@ public class OI {
         TopClimbingPiston.whenReleased(new RetractTopClimbingPiston());
         BottomClimbingPiston.whileHeld(new ExtendBottomClimbingPiston());
         BottomClimbingPiston.whenReleased(new RetractBottomPiston());
-        Climb.whenPressed(new LevelDuringClimb());
-        
+//        Climb.whenPressed(new LevelDuringClimb());
+        pitchFore.whileHeld(new MoveClimbingMotor());
+        pitchAft.whileHeld(new MoveClimbingMotorBackwards());
     }
     
     public XboxController getXbox() {

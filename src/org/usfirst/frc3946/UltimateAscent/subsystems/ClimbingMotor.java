@@ -108,12 +108,8 @@ public class ClimbingMotor extends PIDSubsystem {
         return currentSensor.getVoltage()*15.7;
     }
     
-       public double getYAccel(){
-           
+    public double getYAccel(){   
         ADXL345_I2C.AllAxes allAxes =   balancer.getAccelerations();
-        
-           
         return allAxes.YAxis;
     }
-    
 }

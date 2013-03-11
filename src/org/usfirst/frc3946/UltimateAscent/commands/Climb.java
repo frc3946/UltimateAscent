@@ -17,13 +17,12 @@ public class Climb extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-        // addSequential (new ExtendClimbingPiston());
-        //MoveClimbingMotor
+//        addSequential (new ExtendTopClimbingPiston());
         addSequential (new RetractTopClimbingPiston());
         addSequential(new RetractBottomPiston());
         addSequential (new MoveClimbingMotor());
         addSequential (new ExtendBottomClimbingPiston());
-        //#9 move horizontal hooks until level
+//        #9 move horizontal hooks until level
         addSequential (new LevelDuringClimb());
         
         addParallel (new ExtendTopClimbingPiston());

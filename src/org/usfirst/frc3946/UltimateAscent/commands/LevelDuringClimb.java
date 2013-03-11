@@ -18,14 +18,14 @@ public class LevelDuringClimb extends CommandBase {
     public LevelDuringClimb() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires (climbingMotor);
+//        requires (climbingMotor);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         System.out.println("LevelDuringClimb");
-        climbingMotor.setSetpoint(0.0);
-        climbingMotor.enable();
+//        climbingMotor.setSetpoint(0.0);
+//        climbingMotor.enable();
         setTimeout (2);
     }
 
