@@ -2,18 +2,10 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/TopClimbingPistons.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/BottomClimbingPistons.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/DriveTrain.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/TankDrive.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/XboxController.java</file>
+        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/SocketPi.java</file>
         <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/RobotMap.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/LevelDuringClimb.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/CommandBase.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/ExtendBottomClimbingPiston.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/ExtendTopClimbingPiston.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/RetractTopClimbingPiston.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/RetractBottomPiston.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/OI.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/Climb.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/commands/MoveClimbingMotor.java</file>
-        <file>file:/home/gixxy/NetBeansProjects/UltimateAscent/src/org/usfirst/frc3946/UltimateAscent/subsystems/ClimbingMotor.java</file>
     </open-files>
 </project-private>
