@@ -26,7 +26,8 @@ public class Autonomous extends CommandGroup {
         
         //shoot four frisbee with a delay in between
         double frisbeeShotDelay = 1.0;
-        
+
+        addSequential(new AutoAim());
        
         addSequential(new LaunchFrisbee());
         addSequential(new Delay(frisbeeShotDelay));

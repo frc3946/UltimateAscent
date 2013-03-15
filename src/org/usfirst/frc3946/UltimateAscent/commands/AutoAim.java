@@ -5,8 +5,7 @@
 package org.usfirst.frc3946.UltimateAscent.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import java.io.IOException;
+import org.usfirst.frc3946.UltimateAscent.subsystems.ThreadedberryPi;
 
 /**
  *
@@ -20,6 +19,7 @@ public class AutoAim extends CommandBase {
     private double connectInterum = 1;
     private boolean robotIsCentered = false;
     private boolean robotIsOffset = false;
+    private boolean robotInPosition = false;
     private double left = 0;
     private double right = 0;
             
@@ -36,125 +36,59 @@ public class AutoAim extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        left = 0;
-        right = 0;
-        if(!raspberryPi.getPi().isConnected()) {
-            try {
-                raspberryPi.getPi().connect();
-            } catch (IOException ex) {
-                System.out.println("AutoAimInit: Conntecting Failed!");
-            }
-        }
+        
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         
         driveTrain.tankDrive(left, right);
-        System.out.println("Left: " + String.valueOf(left));
-        System.out.println("Right: " + String.valueOf(right));
         currentTime = Timer.getFPGATimestamp();
-       
-        if(raspberryPi.getPi().isConnected()) {
-            if(currentTime - previousCheckTime > checkInterum) {
-                previousCheckTime = currentTime;
-                try {
-                    String rawData = raspberryPi.getPi().getRawData(); //Get Raw String Input
-                    if(rawData.length() < 1) {
-                        return; //Check for No Data
-                    }
-                    String[] tokenData = raspberryPi.getPi().tokenizeData(rawData); //Tokenize Raw Input
-                    if(tokenData.length < 4) {
-                        return; //Check for No Data
-                    }
-                    if(tokenData[0].equals("n")) {
-                        return; //Check if no Image Data was Returned
-                    }
-                    if(raspberryPi.getPi().isNumeric(tokenData[0])){ //Attempt to Parse first value into Int
-                        center = Integer.parseInt(tokenData[0]); 
-                    } else {
-                        center = -999;
-                    }
-                    if(raspberryPi.getPi().isNumeric(tokenData[3])) { //Attempt to Parse third value into Int
-                        distance = Integer.parseInt(tokenData[3]);
-                    } else {
-                        distance = -999;
-                    }
-                    SmartDashboard.putNumber("Offset", center); //Print Data to SmartDashboard
-                    SmartDashboard.putNumber("Distance", distance);
-                    
-                    robotIsCentered = false;
-                    if(center >= 20) { //Turning
-                        driveTrain.tankDrive(-1, 1);
-                        left = -1;
-                        right = 1;
-                    } else if(center <= -20) {
-                        driveTrain.tankDrive(1, -1);
-                        left = 1;
-                        right = -1;
-                    } else {
-                        robotIsCentered = true;
-                        driveTrain.tankDrive(0, 0);
-                        left = 0;
-                        right = 0;
-                    }
-                    
-                    if (robotIsCentered == true) {
-                        
-                    
-                        if(distance >= 22500) { //Distance
-                            driveTrain.tankDrive(1,1);
-                            left = 1;
-                            right = 1;
-                        } else if(distance <= 21500) {
-                            driveTrain.tankDrive(-1,-1);
-                            left = -1;
-                            right = -1;
-                        } else {
-                            driveTrain.tankDrive(0, 0);
-                            left = 0;
-                            right = 0;
-                        }
-                    }
-                    
-                    errorAccum = 1;
-                } catch (IOException ex) {
-                    driveTrain.tankDrive(0, 0);
-                    left = 0;
-                    right = 0;
-                    errorAccum++;
-                    if(errorAccum >= 5) { //Disconnect after 5 consecutive errors
-                        try {
-                            raspberryPi.getPi().disconnect();
-                        } catch (IOException ex1) {
-                            System.out.println("AutoAimExec: Disconnecting Failed!");
-                        }
-                    }
-                }
-            }
+
+        center = threadedberryPi.getOffset();
+        
+        robotIsCentered = false;
+        robotInPosition = false;
+        if (center >= 15) { //Turning
+            driveTrain.tankDrive(-1, 1);
+            left = -1;
+            right = 1;
+        } else if (center <= -25) {
+            driveTrain.tankDrive(1, -1);
+            left = 1;
+            right = -1;
         } else {
-            
-           // driveTrain.tankDrive(0, 0);
-            if(currentTime - previousConnectTime > connectInterum) {
-                previousConnectTime = currentTime;
-                try {
-                    raspberryPi.getPi().connect();
-                } catch (IOException ex) {
-                    System.out.println("AutoAimExec: Connecting Failed?");
-                }
+            robotIsCentered = true;
+            driveTrain.tankDrive(0, 0);
+            left = 0;
+            right = 0;
+        }
+
+        if (robotIsCentered == true) {
+            if (distance >= 22500) { //Distance
+                driveTrain.tankDrive(1, 1);
+                left = 1;
+                right = 1;
+            } else if (distance <= 21500) {
+                driveTrain.tankDrive(-1, -1);
+                left = -1;
+                right = -1;
+            } else {
+                driveTrain.tankDrive(0, 0);
+                left = 0;
+                right = 0;
+                robotInPosition = true;
             }
         }
-        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return robotInPosition;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        driveTrain.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

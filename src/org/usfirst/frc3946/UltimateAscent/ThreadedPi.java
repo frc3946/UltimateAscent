@@ -84,7 +84,7 @@ public class ThreadedPi {
                                 report = false;
                             } else {
                                 try {
-                                    distance = Integer.parseInt(data[3]); //Get data
+                                    distance = Integer.parseInt(data[1]); //Get data
                                     offset = Integer.parseInt(data[0]);
                                 } catch(NumberFormatException ex) {
                                     report = false;
