@@ -40,13 +40,15 @@ public class DriveTrain extends Subsystem {
     }
     
     public void tankDrive(double left, double right) {
-        drive.tankDrive(-(6.9/8.0)*left, -right);
+        drive.tankDrive((6.9/8.0)*left, right);
         SmartDashboard.putNumber("LeftDrive", this.left.getSpeed());
         SmartDashboard.putNumber("RightDrive", this.right.getSpeed());
     }
     
     public DriveTrain() {
         super();
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false); //fix reversed motors
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         LiveWindow.addActuator("DriveTrain", "RightWheel", right);
         LiveWindow.addActuator("DriveTrain", "LeftWheel", left);
         System.out.println(this.getClass().getName()+" Initialized");
