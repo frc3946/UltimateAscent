@@ -24,6 +24,8 @@ public class RobotMap {
     public static final int cypress = 4;
     
     //Buttons
+    public static final int launchFrisbee = XboxController.ButtonType.kRTrigger.value;
+    public static final int loadFrisbee = XboxController.ButtonType.kLTrigger.value;
     public static final int firePiston = XboxController.ButtonType.kX.value;
     public static final int TopClimbingPiston = XboxController.ButtonType.kY.value;
     public static final int BottomClimbingPiston = XboxController.ButtonType.kA.value;

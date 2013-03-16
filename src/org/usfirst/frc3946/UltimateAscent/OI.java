@@ -57,6 +57,8 @@ public class OI {
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
         firePiston = new JoystickButton(xbox, RobotMap.firePiston);
+        loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
+        launchFrisbee = new JoystickButton(xbox, RobotMap.launchFrisbee);
         TopClimbingPiston = new JoystickButton (xbox, RobotMap.TopClimbingPiston);
         BottomClimbingPiston = new JoystickButton (xbox, RobotMap.BottomClimbingPiston);
 //        Climb = new JoystickButton(xbox, RobotMap.Climb);
@@ -66,8 +68,8 @@ public class OI {
         AutoAim = new JoystickButton(xbox, RobotMap.AutoAim);
         
         AutoAim.whileHeld(new AutoAim());
-        if(xbox.getThrottle()>0){new LaunchFrisbee();}
-        if(xbox.getThrottle()<0){new LoadFrisbee();}
+        loadFrisbee.whileHeld(new LaunchFrisbee());
+        launchFrisbee.whenPressed(new LoadFrisbee());
         StopMotors.whenPressed(new StopLaunchWheels(0));
         loadFrisbee.whileHeld(new LoadFrisbee());
         firePiston.whenPressed(new FirePiston());

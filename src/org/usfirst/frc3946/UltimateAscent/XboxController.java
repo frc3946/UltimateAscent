@@ -87,6 +87,8 @@ public class XboxController extends GenericHID implements IInputOutput {
         private static final int kStart_val = 8;
         private static final int kLeftStick_val = 9;
         private static final int kRightStick_val = 10;
+        private static final int kRTrigger_val = 11;
+        private static final int kLTrigger_val = 12;
         
         private ButtonType(int value) {
             this.value = value;
@@ -136,6 +138,16 @@ public class XboxController extends GenericHID implements IInputOutput {
          * Button: Select
          */
         public static final ButtonType kStart = new ButtonType(kStart_val);
+        
+        /**
+         * Button: Right Trigger
+         */
+        public static final ButtonType kRTrigger = new ButtonType(kRTrigger_val);
+        
+        /**
+         * Button: Left Trigger
+         */
+        public static final ButtonType kLTrigger = new ButtonType(kLTrigger_val);
         
         /**
          * Button: Start
@@ -286,6 +298,13 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return State of the button
      */
     public boolean getRawButton(int button) {
+        if(button == 12) {
+            if(getThrottle() >= .8)
+                return ((0x1 << 11) & m_ds.getStickButtons(m_port)) != 0;
+        } else if(button == 11) {
+            if(getThrottle() <= -.8)
+                return ((0x1 << 10) & m_ds.getStickButtons(m_port)) != 0;
+        }
         return ((0x1 << (button - 1)) & m_ds.getStickButtons(m_port)) != 0;
     }
     

@@ -40,7 +40,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void tankDrive(double left, double right) {
-        drive.tankDrive((6/8)*left, right);
+        drive.tankDrive(-(6.9/8.0)*left, -right);
         SmartDashboard.putNumber("LeftDrive", this.left.getSpeed());
         SmartDashboard.putNumber("RightDrive", this.right.getSpeed());
     }
