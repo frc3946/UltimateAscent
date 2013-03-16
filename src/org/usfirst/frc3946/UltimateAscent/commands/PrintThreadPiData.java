@@ -22,6 +22,9 @@ public class PrintThreadPiData extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         lastTime = 0;
+        if(!threadedberryPi.isConnected() || !threadedberryPi.isEnabled()) {
+            threadedberryPi.startPi();
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
