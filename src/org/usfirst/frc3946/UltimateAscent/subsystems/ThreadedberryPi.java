@@ -26,14 +26,14 @@ public class ThreadedberryPi extends Subsystem {
     /**
      * Start getting Data from Pi
      */
-    public void start() {
+    public void startPi() {
         raspberryPi.start();
     }
     
     /**
      * Stop getting Data from Pi
      */
-    public void stop() {
+    public void stopPi() {
         raspberryPi.stop();
     }
     
@@ -83,7 +83,7 @@ public class ThreadedberryPi extends Subsystem {
     public ThreadedberryPi() {
         super();
         raspberryPi = new ThreadedPi();
-        start();
+        startPi();
         System.out.println(this.getClass().getName()+" Initialized");
     }
 }

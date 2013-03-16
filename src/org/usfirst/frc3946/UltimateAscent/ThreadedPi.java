@@ -90,6 +90,7 @@ public class ThreadedPi {
                                     report = false;
                                 }
                             }
+                            System.out.println("Pi Data Get!!!!");
                         } catch (IOException ex) {
                             report = false;
                         }
