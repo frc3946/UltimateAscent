@@ -77,6 +77,10 @@ public class ThreadedberryPi extends Subsystem {
        return raspberryPi.getTime();
     }
     
+    public boolean getReport() {
+       return raspberryPi.getReport();
+    }
+      
     /**
      * Constructor, starts Pi Thread
      */

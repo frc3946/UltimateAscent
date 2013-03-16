@@ -6,6 +6,8 @@ package org.usfirst.frc3946.UltimateAscent;
 
 import com.sun.squawk.util.StringTokenizer;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Utility;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -18,7 +20,7 @@ import javax.microedition.io.SocketConnection;
  */
 public class ThreadedPi {
     
-    private String url = "Socket://10.39.46.12:10000";
+    private String url = "socket://10.39.46.12:10000";
     private int bufferSize = 64;
     private char delimiter = ',';
     
@@ -32,22 +34,35 @@ public class ThreadedPi {
     private boolean m_connected = false;
     
     Thread m_thread;
-    private boolean m_enabled;
+    private boolean m_enabled =false;
     private boolean m_run = true;
-    
+
     public static class DataKeeper {
-        private static int m_distance;
-        private static int m_offset;
-        private static double m_time;
+        private static int m_distance = 0;
+        private static int m_offset = 0;
+        private static double m_time = 0;
+        private static boolean m_report = false;
+        
+        public static synchronized void setReport(boolean report) {
+            m_report = report;
+            SmartDashboard.putBoolean("PiReport", m_report);
+        }
         
         public static synchronized void setDistance(int distance) {
             m_distance = distance;
+            SmartDashboard.putNumber("PiDistance", m_distance);
         }
         public static synchronized void setOffset(int offset) {
             m_offset = offset;
+            SmartDashboard.putNumber("PiOffset", m_offset);
         }
         public static synchronized void setTime(double time) {
             m_time = time;
+            SmartDashboard.putNumber("PiTime", m_time);
+        }
+        
+        public static synchronized boolean getReport() {
+            return m_report;
         }
         
         public static synchronized int getDistance() {
@@ -70,6 +85,7 @@ public class ThreadedPi {
     
         public RaspberryPiThread(ThreadedPi raspberryPi) {
             m_raspberryPi = raspberryPi;
+            
         }
         
         public void run() {
@@ -80,7 +96,7 @@ public class ThreadedPi {
                         try {
                             String[] data = m_raspberryPi.tokenizeData(m_raspberryPi.getRawData()); //Get and examine Data
                             time = Timer.getFPGATimestamp();
-                            if(data.length < 4) { //Error Check
+                            if(data.length < 2) { //Error Check
                                 report = false;
                             } else {
                                 try {
@@ -90,10 +106,11 @@ public class ThreadedPi {
                                     report = false;
                                 }
                             }
-                            System.out.println("Pi Data Get!!!!");
                         } catch (IOException ex) {
                             report = false;
                         }
+                        DataKeeper.setReport(report);
+                                
                         if(report) { //Store Data in DataKeeper
                             DataKeeper.setDistance(distance);
                             DataKeeper.setOffset(offset);
@@ -102,11 +119,13 @@ public class ThreadedPi {
                     } else {
                         try {
                             m_raspberryPi.connect();
-                        } catch (IOException ex) {}
+                        } catch (IOException ex) {
+                            DataKeeper.setReport(false);
+                        }
                     }
                 }
                 try {
-                    Thread.sleep(500); //Wait half second before getting Data again
+                    Thread.sleep(375); //Wait half second before getting Data again
                 } catch(InterruptedException ex) {}
             }
         }
@@ -115,13 +134,22 @@ public class ThreadedPi {
     public ThreadedPi() {
         m_enabled = false;
         m_thread = new RaspberryPiThread(this);
+        try{
+         connect();
+        } catch (IOException ex){
+            ex.printStackTrace();
+            System.out.println(ex.getMessage());
+        }
+        
+        m_thread.start();
     }
     
     public synchronized void connect() throws IOException {
-        m_socket = (SocketConnection) Connector.open(url, Connector.READ_WRITE, false);
+        m_socket = (SocketConnection) Connector.open(url);//, Connector.READ_WRITE, true);
         m_is = m_socket.openInputStream();
         m_os = m_socket.openOutputStream();
         m_connected = true;
+        
     }
     
     public synchronized void disconnect() throws IOException {
@@ -136,9 +164,12 @@ public class ThreadedPi {
         //to figure out if we're connected or not
         try{
             m_os.write('\n'); //request Data
-        }
-        catch(IOException ex){
+            m_connected = true;
+        } catch(IOException ex){
             m_connected = false;
+        } catch(Exception ex) {
+            m_connected = false;
+            
         }
         
         return m_connected;
@@ -159,6 +190,11 @@ public class ThreadedPi {
     public double getTime() {
         return DataKeeper.getTime();
     }
+    
+    public boolean getReport() {
+        return DataKeeper.getReport();
+    }
+    
     public synchronized void start() {
         m_enabled = true;
     }
