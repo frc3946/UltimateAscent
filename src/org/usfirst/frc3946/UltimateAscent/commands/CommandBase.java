@@ -39,7 +39,7 @@ public abstract class CommandBase extends Command {
 
         // Show what command your subsystem is running on the SmartDashboard
         //SmartDashboard.putData(exampleSubsystem);
-        SmartDashboard.putData(raspberryPi);
+        SmartDashboard.putData(threadedberryPi);
         SmartDashboard.putData(compressor);
         SmartDashboard.putData(driveTrain);
         SmartDashboard.putData(frisbeeLoader);

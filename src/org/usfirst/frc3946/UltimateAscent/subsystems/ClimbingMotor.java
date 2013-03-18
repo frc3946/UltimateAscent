@@ -24,7 +24,7 @@ public class ClimbingMotor extends PIDSubsystem {
     private static final double Kd = 0.0;
 
     // Initialize your subsystem here
-    Victor motor = new Victor(RobotMap.climbingMotor);
+    private Victor motor = new Victor(RobotMap.climbingMotor);
     ADXL345_I2C balancer;
     AnalogChannel currentSensor = new AnalogChannel(RobotMap.currentSensor);
     
@@ -42,7 +42,7 @@ public class ClimbingMotor extends PIDSubsystem {
     
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+       // setDefaultCommand(new MySpecialCommand());
     }
     
     protected double returnPIDInput() {
@@ -64,13 +64,13 @@ public class ClimbingMotor extends PIDSubsystem {
             return ;
         }
         if(output > 0.1){
-            motor.set(1);
+            motor.set(1.0);
         }
         else if(output < -0.1){
-            motor.set(-1);
+            motor.set(-1.0);
         }
         else{
-            motor.set(0);
+            motor.set(0.0);
         }
         
         
@@ -78,11 +78,11 @@ public class ClimbingMotor extends PIDSubsystem {
     
     public void set(Relay.Value value) {
         if(value == Relay.Value.kForward) {
-            motor.set(1);
+            motor.set(1.0);
         } else if(value == Relay.Value.kReverse) {
-            motor.set(-1);
+            motor.set(-1.0);
         } else {
-            motor.set(0);
+            motor.set(0.0);
         }
     }
     

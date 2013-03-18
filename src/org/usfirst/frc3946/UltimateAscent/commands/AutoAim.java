@@ -5,6 +5,7 @@
 package org.usfirst.frc3946.UltimateAscent.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3946.UltimateAscent.subsystems.ThreadedberryPi;
 
 /**
@@ -12,6 +13,7 @@ import org.usfirst.frc3946.UltimateAscent.subsystems.ThreadedberryPi;
  * @author Gustave Michel
  */
 public class AutoAim extends CommandBase {
+
     private double currentTime = 0;
     private double previousCheckTime = 0;
     private double checkInterum = .4;
@@ -22,11 +24,23 @@ public class AutoAim extends CommandBase {
     private boolean robotInPosition = false;
     private double left = 0;
     private double right = 0;
-            
+    private double delta = 1.0;
+    private double adjustedMotorSpeed = 0;
+    private double timeDelta = 0;
+    private double lastMotorUpdateTime = 0;
+    private double lastMotorUpdateDelta = 0;
     private int center;
+    private int centerDelta;
+    private int centerRange = 40;
+    private int centerMidpoint = -65;
     private int distance;
+    private int distanceDelta;
+    private int distanceRange = 500;
+    private int distanceMidPoint = 22000;
     private int errorAccum = 0;
-    
+    public static final double maxMotorSpeed = .7;
+    public static final double minMotorSpeed = .4;
+
     public AutoAim() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -36,54 +50,100 @@ public class AutoAim extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        
-        driveTrain.tankDrive(left, right);
-        currentTime = Timer.getFPGATimestamp();
+        SmartDashboard.putNumber("PiTime", threadedberryPi.getTime());
+        SmartDashboard.putNumber("PiDistance", threadedberryPi.getDistance());
+        SmartDashboard.putNumber("PiOffset", threadedberryPi.getOffset());
+        SmartDashboard.putBoolean("PiReport", threadedberryPi.getReport());
+
+        currentTime = threadedberryPi.getTime();
+        //System.out.println(currentTime + ", " + previousCheckTime);
+        timeDelta = currentTime - previousCheckTime;
+        previousCheckTime = currentTime;
+        lastMotorUpdateDelta = Timer.getFPGATimestamp() - lastMotorUpdateTime;
+
+        //there is a "dead time" between .2 and .7 where the motors are stopped
+        if ((lastMotorUpdateDelta < .7 && lastMotorUpdateDelta > .2)
+                || timeDelta > 0.5
+                || threadedberryPi.getReport() == false) {
+            left = 0;
+            right = 0;
+            return;
+        }
+
+        //only refresh teh variable after the alive time had ended
+        if (lastMotorUpdateDelta >= .3) {
+            lastMotorUpdateTime = Timer.getFPGATimestamp();
+        }
+
 
         center = threadedberryPi.getOffset();
-        
+
         robotIsCentered = false;
         robotInPosition = false;
-        if (center >= 15) { //Turning
-            driveTrain.tankDrive(-1, 1);
-            left = -1;
-            right = 1;
-        } else if (center <= -25) {
-            driveTrain.tankDrive(1, -1);
-            left = 1;
-            right = -1;
+        centerDelta = center - centerMidpoint;
+        delta = centerDelta / centerRange;
+        if (delta > 1.0){
+            delta =1.0;
+        }
+        adjustedMotorSpeed = Math.max(minMotorSpeed, maxMotorSpeed * delta);
+
+        if (centerDelta >= centerRange / 2) { //Turning            
+            left = -adjustedMotorSpeed;
+            right = adjustedMotorSpeed;
+        } else if (centerDelta <= -centerRange / 2) {
+            left = adjustedMotorSpeed;
+            right = -adjustedMotorSpeed;
         } else {
             robotIsCentered = true;
-            driveTrain.tankDrive(0, 0);
             left = 0;
             right = 0;
         }
 
+        //if we are in cetner mode only run for a lower amount of seconds
+        if (lastMotorUpdateDelta >= .12 && robotIsCentered == false) {
+            left = 0;
+            right = 0;
+            return;
+        }
+
         if (robotIsCentered == true) {
-            if (distance >= 22500) { //Distance
-                driveTrain.tankDrive(1, 1);
-                left = 1;
-                right = 1;
-            } else if (distance <= 21500) {
-                driveTrain.tankDrive(-1, -1);
-                left = -1;
-                right = -1;
+
+            distance = threadedberryPi.getDistance();
+            distanceDelta = distance - distanceMidPoint;
+            delta = distanceDelta / distanceRange;
+            if (delta > 1.0){
+                delta =1.0;
+            }
+            adjustedMotorSpeed = Math.max(minMotorSpeed, maxMotorSpeed * delta);
+            if (distanceDelta >= distanceRange / 2) { //Turning            
+                left = -adjustedMotorSpeed;
+                right = -adjustedMotorSpeed;
+            } else if (distanceDelta <= -distanceRange / 2) {
+                left = adjustedMotorSpeed;
+                right = adjustedMotorSpeed;
             } else {
-                driveTrain.tankDrive(0, 0);
+                robotInPosition = true;
                 left = 0;
                 right = 0;
-                robotInPosition = true;
             }
+
+
         }
+        if (robotInPosition == true && robotIsCentered == true) {
+            SmartDashboard.putBoolean("Locked on", true);
+        } else {
+            SmartDashboard.putBoolean("Locked on", false);
+        }
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        driveTrain.tankDrive(left, right);
         return robotInPosition;
     }
 
