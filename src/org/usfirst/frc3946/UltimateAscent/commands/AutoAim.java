@@ -32,14 +32,16 @@ public class AutoAim extends CommandBase {
     private int center;
     private int centerDelta;
     private int centerRange = 40;
-    private int centerMidpoint = -65;
+    private static final int centerMidpoint = -65;
+    private static int centerAdjust = 0;
     private int distance;
     private int distanceDelta;
-    private int distanceRange = 500;
-    private int distanceMidPoint = 22000;
+    private int distanceRange = 1000;
+    private static final int distanceMidPoint = 22000;
+    private static int distAdjust = 0;
     private int errorAccum = 0;
-    public static final double maxMotorSpeed = .7;
-    public static final double minMotorSpeed = .4;
+    public static final double maxMotorSpeed = 1;
+    public static final double minMotorSpeed = .5;
 
     public AutoAim() {
         // Use requires() here to declare subsystem dependencies
@@ -66,7 +68,7 @@ public class AutoAim extends CommandBase {
         lastMotorUpdateDelta = Timer.getFPGATimestamp() - lastMotorUpdateTime;
 
         //there is a "dead time" between .2 and .7 where the motors are stopped
-        if ((lastMotorUpdateDelta < .7 && lastMotorUpdateDelta > .2)
+        if ((lastMotorUpdateDelta < .7 && lastMotorUpdateDelta > .35)
                 || timeDelta > 0.5
                 || threadedberryPi.getReport() == false) {
             left = 0;
@@ -77,15 +79,17 @@ public class AutoAim extends CommandBase {
         //only refresh teh variable after the alive time had ended
         if (lastMotorUpdateDelta >= .3) {
             lastMotorUpdateTime = Timer.getFPGATimestamp();
+            center = threadedberryPi.getOffset();
+            distance = threadedberryPi.getDistance();
         }
 
 
-        center = threadedberryPi.getOffset();
+        //center = threadedberryPi.getOffset();
 
         robotIsCentered = false;
         robotInPosition = false;
-        centerDelta = center - centerMidpoint;
-        delta = centerDelta / centerRange;
+        centerDelta = center - (centerMidpoint + centerAdjust);
+        delta = centerDelta / (centerRange*3);
         if (delta > 1.0){
             delta =1.0;
         }
@@ -103,18 +107,18 @@ public class AutoAim extends CommandBase {
             right = 0;
         }
 
-        //if we are in cetner mode only run for a lower amount of seconds
-        if (lastMotorUpdateDelta >= .12 && robotIsCentered == false) {
-            left = 0;
-            right = 0;
-            return;
-        }
+        //if we are in center mode only run for a lower amount of seconds
+        //if (lastMotorUpdateDelta >= .12 && robotIsCentered == false) {
+          //  left = 0;
+            //right = 0;
+            //return;
+        //}
 
         if (robotIsCentered == true) {
 
-            distance = threadedberryPi.getDistance();
-            distanceDelta = distance - distanceMidPoint;
-            delta = distanceDelta / distanceRange;
+            
+            distanceDelta = distance - (distanceMidPoint+distAdjust);
+            delta = distanceDelta / (distanceRange*2);
             if (delta > 1.0){
                 delta =1.0;
             }
@@ -139,6 +143,26 @@ public class AutoAim extends CommandBase {
             SmartDashboard.putBoolean("Locked on", false);
         }
 
+    }
+    
+    protected static void aimUp() {
+        distAdjust += 250;
+        SmartDashboard.putNumber("Distance Adjustment", distAdjust);
+    }
+    
+    protected static void aimDown() {
+        distAdjust -= 250;
+        SmartDashboard.putNumber("Distance Adjustment", distAdjust);
+    }
+    
+    protected static void aimLeft() {
+        centerAdjust -= 15;
+        SmartDashboard.putNumber("Windage Adjustment", centerAdjust);
+    }
+    
+    protected static void aimRight() {
+        centerAdjust += 15;
+        SmartDashboard.putNumber("Windage Adjustment", centerAdjust);
     }
 
     // Make this return true when this Command no longer needs to run execute()

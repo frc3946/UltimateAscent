@@ -1,5 +1,7 @@
 package org.usfirst.frc3946.UltimateAscent;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -34,6 +36,12 @@ public class RobotMap {
     public static final int pitchAft = XboxController.ButtonType.kL.value;
     public static final int StopMotors = XboxController.ButtonType.kB.value;
     public static final int AutoAim = XboxController.ButtonType.kStart.value;
+    
+    public static final int adjustUp = 3;
+    public static final int adjustLeft = 4;
+    public static final int adjustRight = 5;
+    public static final int adjustDown = 2;
+    
     
     //Motors
     public static final int leftJaguar = 1; //Blue

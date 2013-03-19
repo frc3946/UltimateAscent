@@ -1,6 +1,7 @@
 
 package org.usfirst.frc3946.UltimateAscent;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc3946.UltimateAscent.commands.*;
@@ -42,6 +43,7 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
     private XboxController xbox;
+    private Joystick genius;
     
     private Button launchFrisbee;
     private Button loadFrisbee;
@@ -54,8 +56,16 @@ public class OI {
     private Button StopMotors;
     private Button AutoAim;
     
+    private Button adjustUp;
+    private Button adjustLeft;
+    private Button adjustRight;
+    private Button adjustDown;
+    
+    
     public OI() {
         xbox = new XboxController(RobotMap.xboxController);
+        genius = new Joystick(RobotMap.leftJoystick);
+        
         firePiston = new JoystickButton(xbox, RobotMap.firePiston);
         loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
         launchFrisbee = new JoystickButton(xbox, RobotMap.launchFrisbee);
@@ -66,6 +76,12 @@ public class OI {
         pitchAft = new JoystickButton(xbox, RobotMap.pitchAft);
         StopMotors = new JoystickButton(xbox, RobotMap.StopMotors);
         AutoAim = new JoystickButton(xbox, RobotMap.AutoAim);
+        
+        adjustUp = new JoystickButton(genius, RobotMap.adjustUp);
+        adjustLeft = new JoystickButton(genius, RobotMap.adjustLeft);
+        adjustRight = new JoystickButton(genius, RobotMap.adjustRight);
+        adjustDown = new JoystickButton(genius, RobotMap.adjustDown);
+        
         
         AutoAim.whileHeld(new AutoAim());
         loadFrisbee.whileHeld(new LaunchFrisbee());
@@ -80,6 +96,11 @@ public class OI {
 //        Climb.whenPressed(new LevelDuringClimb());
         pitchFore.whileHeld(new MoveClimbingMotor());
         pitchAft.whileHeld(new MoveClimbingMotorBackwards());
+        
+        adjustUp.whenPressed(new KWindageUp());
+        adjustLeft.whenPressed(new KWindageLeft());
+        adjustRight.whenPressed(new KWindageRight());
+        adjustDown.whenPressed(new KWindageDown());
     }
     
     public XboxController getXbox() {
