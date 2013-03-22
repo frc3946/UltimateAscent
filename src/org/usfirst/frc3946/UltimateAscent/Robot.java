@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc3946.UltimateAscent.commands.Autonomous;
 import org.usfirst.frc3946.UltimateAscent.commands.CommandBase;
+import org.usfirst.frc3946.UltimateAscent.commands.LowerBumperDeflector;
 import org.usfirst.frc3946.UltimateAscent.commands.StartCompressor;
 
 /**
@@ -26,6 +27,7 @@ import org.usfirst.frc3946.UltimateAscent.commands.StartCompressor;
 public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
+    Command deflector;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -33,6 +35,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         // instantiate the command used for the autonomous period
         autonomousCommand = new Autonomous();
+        deflector = new LowerBumperDeflector();
         // Initialize all subsystems
         CommandBase.init();
     }
@@ -55,7 +58,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         autonomousCommand.cancel();
-        
+        deflector.start();
+//        while(deflector.isRunning());
     }
 
     /**

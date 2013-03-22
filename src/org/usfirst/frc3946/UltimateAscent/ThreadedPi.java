@@ -84,8 +84,8 @@ public class ThreadedPi {
         private boolean report;
     
         public RaspberryPiThread(ThreadedPi raspberryPi) {
+            super("PiSocket");
             m_raspberryPi = raspberryPi;
-            
         }
         
         public void run() {
