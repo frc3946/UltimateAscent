@@ -167,15 +167,33 @@ public class XboxController extends GenericHID implements IInputOutput {
     }
     
     /**
+     * Get Value from an Axis
+     * @param axis Axis Number
+     * @return Value from Axis (-1 to 1)
+     */
+    public double getRawAxis(int axis) {
+        return m_ds.getStickAxis(m_port, axis);
+    }
+    
+    /**
+     * Get Value from an Axis
+     * @param axis AxisType
+     * @return 
+     */
+    public double getAxis(AxisType axis) {
+        return getRawAxis(axis.value);
+    }
+    
+    /**
      * Retrieve value for X axis
      * @param hand Hand associated with the Joystick
      * @return Value of Axis (-1 to 1)
      */
     public double getX(Hand hand) {
         if(hand.value == Hand.kRight.value) {
-            return getRawAxis(AxisType.kRightX.value);
+            return getAxis(AxisType.kRightX);
         } else if(hand.value == Hand.kLeft.value) {
-            return getRawAxis(AxisType.kLeftX.value);
+            return getAxis(AxisType.kLeftX);
         } else {
             return 0;
         }
@@ -188,9 +206,9 @@ public class XboxController extends GenericHID implements IInputOutput {
      */
     public double getY(Hand hand) {
         if(hand.value == Hand.kRight.value) {
-            return getRawAxis(AxisType.kRightY.value);
+            return getAxis(AxisType.kRightY);
         } else if(hand.value == Hand.kLeft.value) {
-            return getRawAxis(AxisType.kLeftY.value);
+            return getAxis(AxisType.kLeftY);
         } else {
             return 0;
         }
@@ -210,7 +228,7 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return Axis Value (-1 to 1)
      */
     public double getTwist() {
-        return getRawAxis(AxisType.kDLeftRight.value);
+        return getAxis(AxisType.kDLeftRight);
     }
     
     /**
@@ -218,78 +236,7 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return Axis Value (-1 to 1)
      */
     public double getThrottle() {
-        return getRawAxis(AxisType.kTrigger.value);
-    }
-    
-    /**
-     * Get Value from an Axis
-     * @param axis Axis Number
-     * @return Value from Axis (-1 to 1)
-     */
-    public double getRawAxis(int axis) {
-        return m_ds.getStickAxis(m_port, axis);
-    }
-    
-    /**
-     * Get Value from an Axis
-     * @param axis AxisType
-     * @return 
-     */
-    public double getAxis(AxisType axis) {
-        return getRawAxis(axis.value);
-    }
-    
-    /**
-     * Get Trigger Value as Button
-     * @param hand Hand associated with button
-     * @return false
-     */
-    public boolean getTrigger(Hand hand) {
-        if(hand.value == Hand.kLeft.value) {
-            if(getAxis(AxisType.kTrigger) > .1) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if(hand.value == Hand.kRight.value) {
-            if(getAxis(AxisType.kTrigger) < .1) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-     * Get Button from Joystick
-     * @param hand hand associated with the button
-     * @return Button Status (true or false)
-     */
-    public boolean getTop(Hand hand) {
-        if(hand.value == Hand.kRight.value) {
-            return getRawButton(ButtonType.kRightStick.value);
-        } else if(hand.value == Hand.kLeft.value) {
-            return getRawButton(ButtonType.kLeftStick.value);
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-     * Get Value from Back buttons
-     * @param hand hand associated with the button
-     * @return state of left or right 
-     */
-    public boolean getBumper(Hand hand) {
-        if(hand.value == Hand.kRight.value) {
-            return getRawButton(ButtonType.kR.value);
-        } else if(hand.value == Hand.kLeft.value) {
-            return getRawButton(ButtonType.kL.value);
-        } else {
-            return false;
-        }
+        return getAxis(AxisType.kTrigger);
     }
     
     /**
@@ -298,12 +245,17 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return State of the button
      */
     public boolean getRawButton(int button) {
-        if(button == 12) {
+        if(button == ButtonType.kRTrigger.value) { //Abstracted Buttons from Analog Axis
             if(getThrottle() >= .8)
-                return ((0x1 << 11) & m_ds.getStickButtons(m_port)) != 0;
-        } else if(button == 11) {
+                return true;
+            else
+                return false;
+        }
+        if(button == ButtonType.kLTrigger.value) { //Abstracted Buttons from Analog Axis
             if(getThrottle() <= -.8)
-                return ((0x1 << 10) & m_ds.getStickButtons(m_port)) != 0;
+                return true;
+            else
+                return false;
         }
         return ((0x1 << (button - 1)) & m_ds.getStickButtons(m_port)) != 0;
     }
@@ -318,11 +270,56 @@ public class XboxController extends GenericHID implements IInputOutput {
     }
     
     /**
+     * Get Trigger Value as Button
+     * @param hand Hand associated with button
+     * @return false
+     */
+    public boolean getTrigger(Hand hand) {
+        if(hand == Hand.kLeft) {
+            return getButton(ButtonType.kLTrigger);
+        } else if(hand == Hand.kRight) {
+            return getButton(ButtonType.kRTrigger);
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Get Button from Joystick
+     * @param hand hand associated with the button
+     * @return Button Status (true or false)
+     */
+    public boolean getTop(Hand hand) {
+        if(hand == Hand.kRight) {
+            return getButton(ButtonType.kRightStick);
+        } else if(hand == Hand.kLeft) {
+            return getButton(ButtonType.kLeftStick);
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Get Value from Back buttons
+     * @param hand hand associated with the button
+     * @return state of left or right 
+     */
+    public boolean getBumper(Hand hand) {
+        if(hand == Hand.kRight) {
+            return getButton(ButtonType.kR);
+        } else if(hand == Hand.kLeft) {
+            return getButton(ButtonType.kL);
+        } else {
+            return false;
+        }
+    }
+    
+    /**
      * Get State of Select Button
      * @return State of button
      */
     public boolean getStart() {
-        return getRawButton(ButtonType.kStart.value);
+        return getButton(ButtonType.kStart);
     }
     
     /**
@@ -330,7 +327,7 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return State of button
      */
     public boolean getBack() {
-        return getRawButton(ButtonType.kBack.value);
+        return getButton(ButtonType.kBack);
     }
     
     /**
@@ -338,7 +335,7 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return State of button
      */
     public boolean getAButton() {
-        return getRawButton(ButtonType.kA.value);
+        return getButton(ButtonType.kA);
     }
     
     /**
@@ -346,7 +343,7 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return State of button
      */
     public boolean getBButton() {
-        return getRawButton(ButtonType.kB.value);
+        return getButton(ButtonType.kB);
     }
     
     /**
@@ -354,7 +351,7 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return State of button
      */
     public boolean getXButton() {
-        return getRawButton(ButtonType.kX.value);
+        return getButton(ButtonType.kX);
     }
     
     /**
@@ -362,6 +359,6 @@ public class XboxController extends GenericHID implements IInputOutput {
      * @return State of button
      */
     public boolean getYButton() {
-        return getRawButton(ButtonType.kY.value);
+        return getButton(ButtonType.kY);
     }
 }
