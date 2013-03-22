@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc3946.UltimateAscent.SocketPi;
 import org.usfirst.frc3946.UltimateAscent.RobotMap;
 import org.usfirst.frc3946.UltimateAscent.commands.TankDrive;
 
@@ -35,8 +34,11 @@ public class DriveTrain extends Subsystem {
         tankDrive(left.getY(), right.getY());
     }
     
-    public void tankDrive(GenericHID stick) {
-        tankDrive(stick.getY(GenericHID.Hand.kLeft), stick.getY(GenericHID.Hand.kRight));
+    public void pyramidDrive(GenericHID.Hand stick) {
+        double speedDelta;
+        GenericHID hid = null;
+        speedDelta = hid.getX(stick);
+        tankDrive(hid.getY(stick)/2 + speedDelta/2, hid.getY(stick)/2 -speedDelta/2);
     }
     
     public void tankDrive(double left, double right) {

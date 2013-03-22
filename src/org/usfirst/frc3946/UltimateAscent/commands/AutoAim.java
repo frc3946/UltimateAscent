@@ -32,7 +32,7 @@ public class AutoAim extends CommandBase {
     private int center;
     private int centerDelta;
     private int centerRange = 40;
-    private static final int centerMidpoint = -65;
+    private static final int centerMidpoint = 65;
     private static int centerAdjust = 0;
     private int distance;
     private int distanceDelta;
@@ -88,17 +88,17 @@ public class AutoAim extends CommandBase {
 
         robotIsCentered = false;
         robotInPosition = false;
-        centerDelta = center - (centerMidpoint + centerAdjust);
+        centerDelta = center - (centerMidpoint - centerAdjust);
         delta = centerDelta / (centerRange*3);
         if (delta > 1.0){
             delta =1.0;
         }
         adjustedMotorSpeed = Math.max(minMotorSpeed, maxMotorSpeed * delta);
 
-        if (centerDelta >= centerRange / 2) { //Turning            
+        if (centerDelta <= centerRange / 2) { //Turning
             left = -adjustedMotorSpeed;
             right = adjustedMotorSpeed;
-        } else if (centerDelta <= -centerRange / 2) {
+        } else if (centerDelta >= -centerRange / 2) {
             left = adjustedMotorSpeed;
             right = -adjustedMotorSpeed;
         } else {

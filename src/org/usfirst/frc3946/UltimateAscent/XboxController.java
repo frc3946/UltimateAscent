@@ -166,6 +166,7 @@ public class XboxController extends GenericHID implements IInputOutput {
         m_ds = DriverStation.getInstance();
     }
     
+    
     /**
      * Retrieve value for X axis
      * @param hand Hand associated with the Joystick
@@ -299,11 +300,13 @@ public class XboxController extends GenericHID implements IInputOutput {
      */
     public boolean getRawButton(int button) {
         if(button == 12) {
-            if(getThrottle() >= .8)
+            if(getThrottle() >= .8) {
                 return ((0x1 << 11) & m_ds.getStickButtons(m_port)) != 0;
+            }
         } else if(button == 11) {
-            if(getThrottle() <= -.8)
+            if(getThrottle() <= -.8) {
                 return ((0x1 << 10) & m_ds.getStickButtons(m_port)) != 0;
+            }
         }
         return ((0x1 << (button - 1)) & m_ds.getStickButtons(m_port)) != 0;
     }

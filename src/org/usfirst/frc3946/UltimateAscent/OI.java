@@ -84,14 +84,16 @@ public class OI {
         
         
         AutoAim.whileHeld(new AutoAim());
-        loadFrisbee.whileHeld(new LaunchFrisbee());
-        launchFrisbee.whenPressed(new LoadFrisbee());
+        loadFrisbee.whileHeld(new LoadFrisbee());
+        launchFrisbee.whenPressed(new LaunchFrisbee());
         StopMotors.whenPressed(new StopLaunchWheels(0));
         loadFrisbee.whileHeld(new LoadFrisbee());
         firePiston.whenPressed(new FirePiston());
         TopClimbingPiston.whileHeld(new ExtendTopClimbingPiston());
+        TopClimbingPiston.whileHeld(new PyramidDrive());
         TopClimbingPiston.whenReleased(new RetractTopClimbingPiston());
         BottomClimbingPiston.whileHeld(new ExtendBottomClimbingPiston());
+        BottomClimbingPiston.whileHeld(new PyramidDrive());
         BottomClimbingPiston.whenReleased(new RetractBottomPiston());
 //        Climb.whenPressed(new LevelDuringClimb());
         pitchFore.whileHeld(new MoveClimbingMotor());
