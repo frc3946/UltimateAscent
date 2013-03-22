@@ -22,21 +22,20 @@ public class RobotMap {
     //Joysticks
     public static final int xboxController = 1;
     public static final int leftJoystick = 2;
-    public static final int rightJoystick = 3;
-    public static final int cypress = 4;
     
-    //Buttons
+    //XboxController Buttons
     public static final int launchFrisbee = XboxController.ButtonType.kRTrigger.value;
     public static final int loadFrisbee = XboxController.ButtonType.kLTrigger.value;
     public static final int firePiston = XboxController.ButtonType.kX.value;
     public static final int TopClimbingPiston = XboxController.ButtonType.kY.value;
     public static final int BottomClimbingPiston = XboxController.ButtonType.kA.value;
-//    public static final int Climb = XboxController.ButtonType.kB.value;
-    public static final int pitchFore = XboxController.ButtonType.kR.value;
-    public static final int pitchAft = XboxController.ButtonType.kL.value;
     public static final int StopMotors = XboxController.ButtonType.kB.value;
+    public static final int pitchAft = XboxController.ButtonType.kL.value;
+    public static final int pitchFore = XboxController.ButtonType.kR.value;
     public static final int AutoAim = XboxController.ButtonType.kStart.value;
+    //    public static final int Climb = XboxController.ButtonType.kB.value;
     
+    //leftJoystick Buttons
     public static final int adjustUp = 3;
     public static final int adjustLeft = 4;
     public static final int adjustRight = 5;
@@ -51,7 +50,6 @@ public class RobotMap {
     public static final int frisbeeSecondWheel = 5; //Orange
     
     //Relays (Spikes)
-    //public static final int liftSpike = 1;
     public static final int compressorRelay = 1; //Red
     public static final int frisbeeLoader = 2; //Purple
     public static final int deflector = 3; //Brown
