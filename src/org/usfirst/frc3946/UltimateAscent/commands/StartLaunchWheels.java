@@ -4,6 +4,8 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  *
  * @author Makaylah
@@ -21,6 +23,7 @@ public class StartLaunchWheels extends CommandBase {
         //if the frisbee wheels are stopped
         //then we need some warmup time before
         //next command is allowed to run
+        SmartDashboard.putBoolean("Launch Wheels", frisbeeWheels.isRunning());
         if(!frisbeeWheels.isRunning()) {
             setTimeout(4.5);
         } else {

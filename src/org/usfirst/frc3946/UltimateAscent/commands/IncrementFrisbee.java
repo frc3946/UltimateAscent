@@ -6,6 +6,7 @@ package org.usfirst.frc3946.UltimateAscent.commands;
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,6 +23,7 @@ public class IncrementFrisbee extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         frisbeeLoader.set(Relay.Value.kReverse);
+        SmartDashboard.putData("Loading:", frisbeeLoader.getCurrentCommand());
         setTimeout(1.2);
     }
 

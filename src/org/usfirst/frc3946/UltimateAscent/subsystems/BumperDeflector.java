@@ -35,11 +35,11 @@ public class BumperDeflector extends Subsystem {
     public void set(Relay.Value value) {
         deflector.set(value);
         if(value == Relay.Value.kForward) {
-            SmartDashboard.putString("Loader", "Forward");
+            SmartDashboard.putString("Fender", "Forward");
         } else if(value == Relay.Value.kReverse) {
-           SmartDashboard.putString("Loader", "Reverse");
+           SmartDashboard.putString("Fender", "Reverse");
         } else {
-            SmartDashboard.putString("Loader", "Off");
+            SmartDashboard.putString("Fender", "Off");
         }
     }
     

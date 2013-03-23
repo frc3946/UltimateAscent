@@ -6,7 +6,6 @@ package org.usfirst.frc3946.UltimateAscent.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc3946.UltimateAscent.subsystems.ThreadedberryPi;
 
 /**
  *
@@ -168,7 +167,11 @@ public class AutoAim extends CommandBase {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         driveTrain.tankDrive(left, right);
-        return robotInPosition;
+        if(threadedberryPi.isConnected()){
+            return robotInPosition;
+        } else {
+            return true;
+        }
     }
 
     // Called once after isFinished returns true

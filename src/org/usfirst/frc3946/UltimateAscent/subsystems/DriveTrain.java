@@ -34,11 +34,10 @@ public class DriveTrain extends Subsystem {
         tankDrive(left.getY(), right.getY());
     }
     
-    public void pyramidDrive(GenericHID.Hand stick) {
+    public void pyramidDrive(GenericHID stick, GenericHID.Hand hand) {
         double speedDelta;
-        GenericHID hid = null;
-        speedDelta = hid.getX(stick);
-        tankDrive(hid.getY(stick)/2 + speedDelta/2, hid.getY(stick)/2 -speedDelta/2);
+        speedDelta = stick.getX(hand);
+        tankDrive(stick.getY(hand)/2 + speedDelta/2, stick.getY(hand)/2 -speedDelta/2);
     }
     
     public void tankDrive(double left, double right) {

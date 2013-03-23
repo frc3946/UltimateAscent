@@ -47,14 +47,16 @@ public class OI {
     
     private Button launchFrisbee;
     private Button loadFrisbee;
-    private Button firePiston;
+//    private Button firePiston;
     private Button TopClimbingPiston;
     private Button BottomClimbingPiston;
+    private Button fender;
 //    private Button Climb;
     private Button pitchFore;
     private Button pitchAft;
     private Button StopMotors;
     private Button AutoAim;
+    private Button debug;
     
     private Button adjustUp;
     private Button adjustLeft;
@@ -66,16 +68,18 @@ public class OI {
         xbox = new XboxController(RobotMap.xboxController);
         genius = new Joystick(RobotMap.leftJoystick);
         
-        firePiston = new JoystickButton(xbox, RobotMap.firePiston);
+//        firePiston = new JoystickButton(xbox, RobotMap.firePiston);
         loadFrisbee = new JoystickButton(xbox, RobotMap.loadFrisbee);
         launchFrisbee = new JoystickButton(xbox, RobotMap.launchFrisbee);
         TopClimbingPiston = new JoystickButton (xbox, RobotMap.TopClimbingPiston);
         BottomClimbingPiston = new JoystickButton (xbox, RobotMap.BottomClimbingPiston);
+        fender = new JoystickButton(xbox, RobotMap.bumberDeflector);
 //        Climb = new JoystickButton(xbox, RobotMap.Climb);
         pitchFore = new JoystickButton(xbox, RobotMap.pitchFore);
         pitchAft = new JoystickButton(xbox, RobotMap.pitchAft);
         StopMotors = new JoystickButton(xbox, RobotMap.StopMotors);
         AutoAim = new JoystickButton(xbox, RobotMap.AutoAim);
+        debug = new JoystickButton(xbox, RobotMap.debugButton);
         
         adjustUp = new JoystickButton(genius, RobotMap.adjustUp);
         adjustLeft = new JoystickButton(genius, RobotMap.adjustLeft);
@@ -88,16 +92,17 @@ public class OI {
         launchFrisbee.whenPressed(new LaunchFrisbee());
         StopMotors.whenPressed(new StopLaunchWheels(0));
         loadFrisbee.whileHeld(new LoadFrisbee());
-        firePiston.whenPressed(new FirePiston());
         TopClimbingPiston.whileHeld(new ExtendTopClimbingPiston());
         TopClimbingPiston.whileHeld(new PyramidDrive());
         TopClimbingPiston.whenReleased(new RetractTopClimbingPiston());
         BottomClimbingPiston.whileHeld(new ExtendBottomClimbingPiston());
         BottomClimbingPiston.whileHeld(new PyramidDrive());
         BottomClimbingPiston.whenReleased(new RetractBottomPiston());
+        fender.whenPressed(new ExtendBumperDeflector());
 //        Climb.whenPressed(new LevelDuringClimb());
         pitchFore.whileHeld(new MoveClimbingMotor());
         pitchAft.whileHeld(new MoveClimbingMotorBackwards());
+        debug.whileHeld(new LoadFrisbee());
         
         adjustUp.whenPressed(new KWindageUp());
         adjustLeft.whenPressed(new KWindageLeft());

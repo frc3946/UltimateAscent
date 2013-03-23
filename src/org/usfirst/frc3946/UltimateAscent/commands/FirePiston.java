@@ -4,6 +4,8 @@
  */
 package org.usfirst.frc3946.UltimateAscent.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  *
  * @author Gustave Michel
@@ -21,6 +23,7 @@ public class FirePiston extends CommandBase {
         
         setTimeout(.5);
         firePiston.extend();
+        SmartDashboard.putData("Fire Piston", firePiston.getCurrentCommand());
     }
 
     // Called repeatedly when this Command is scheduled to run

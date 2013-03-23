@@ -246,16 +246,20 @@ public class XboxController extends GenericHID implements IInputOutput {
      */
     public boolean getRawButton(int button) {
         if(button == ButtonType.kRTrigger.value) { //Abstracted Buttons from Analog Axis
-            if(getThrottle() >= .8)
+            if(getThrottle() <= -.6) {
                 return true;
-            else
+            }
+            else {
                 return false;
+            }
         }
         if(button == ButtonType.kLTrigger.value) { //Abstracted Buttons from Analog Axis
-            if(getThrottle() <= -.8)
+            if(getThrottle() >= .6) {
                 return true;
-            else
+            }
+            else {
                 return false;
+            }
         }
         return ((0x1 << (button - 1)) & m_ds.getStickButtons(m_port)) != 0;
     }

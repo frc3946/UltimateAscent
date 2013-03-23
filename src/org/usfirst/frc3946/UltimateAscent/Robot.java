@@ -28,6 +28,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     Command deflector;
+    Command compressor;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
         // instantiate the command used for the autonomous period
         autonomousCommand = new Autonomous();
         deflector = new LowerBumperDeflector();
+        compressor = new StartCompressor();
         // Initialize all subsystems
         CommandBase.init();
     }
@@ -43,6 +45,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         autonomousCommand.start();
+        compressor.start();
     }
 
     /**
@@ -58,7 +61,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         autonomousCommand.cancel();
-        deflector.start();
+        compressor.cancel();
+//        deflector.start();
 //        while(deflector.isRunning());
     }
 

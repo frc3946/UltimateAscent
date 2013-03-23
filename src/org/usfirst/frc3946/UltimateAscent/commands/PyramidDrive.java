@@ -24,7 +24,7 @@ public class PyramidDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        driveTrain.pyramidDrive(Hand.kLeft);
+        driveTrain.pyramidDrive(oi.getXbox(), Hand.kLeft);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,11 +34,12 @@ public class PyramidDrive extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        driveTrain.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        new TankDrive();
+        end();
     }
 }
