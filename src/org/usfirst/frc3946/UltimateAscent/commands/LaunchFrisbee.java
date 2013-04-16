@@ -39,7 +39,7 @@ public class LaunchFrisbee extends CommandGroup {
         //}
         //addSequential(new LoadFrisbee(), 1.5);
         //addSequential(new FirePiston());
-        //addParallel(new StopLaunchWheels());
+        addParallel(new StopLaunchWheels(5));
         //addSequential(new LoadFrisbee(), 1.5);
     }
 }

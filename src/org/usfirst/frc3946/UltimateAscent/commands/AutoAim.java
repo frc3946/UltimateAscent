@@ -31,12 +31,12 @@ public class AutoAim extends CommandBase {
     private int center;
     private int centerDelta;
     private int centerRange = 40;
-    private static final int centerMidpoint = 65;
+    private static final int centerMidpoint = -75;
     private static int centerAdjust = 0;
     private int distance;
     private int distanceDelta;
     private int distanceRange = 1000;
-    private static final int distanceMidPoint = 22000;
+    private static final int distanceMidPoint = 16500;
     private static int distAdjust = 0;
     private int errorAccum = 0;
     public static final double maxMotorSpeed = 1;
@@ -51,6 +51,7 @@ public class AutoAim extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        setTimeout(7);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -167,8 +168,11 @@ public class AutoAim extends CommandBase {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         driveTrain.tankDrive(left, right);
-        if(threadedberryPi.isConnected()){
-            return robotInPosition;
+        
+        if(isTimedOut()){
+            return true;
+         }else if(threadedberryPi.isConnected()){
+            return robotInPosition;        
         } else {
             return true;
         }

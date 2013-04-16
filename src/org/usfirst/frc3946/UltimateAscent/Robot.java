@@ -35,17 +35,17 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
         // instantiate the command used for the autonomous period
-        autonomousCommand = new Autonomous();
-        deflector = new LowerBumperDeflector();
-        compressor = new StartCompressor();
+        //autonomousCommand = new Autonomous();
+        //deflector = new LowerBumperDeflector();
+        //compressor = new StartCompressor();
         // Initialize all subsystems
         CommandBase.init();
     }
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        autonomousCommand.start();
-        compressor.start();
+        //autonomousCommand.start();
+        //compressor.start();
     }
 
     /**
@@ -60,8 +60,8 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        autonomousCommand.cancel();
-        compressor.cancel();
+        //autonomousCommand.cancel();
+        //compressor.cancel();
 //        deflector.start();
 //        while(deflector.isRunning());
     }

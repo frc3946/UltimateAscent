@@ -15,6 +15,7 @@ public class FirePiston extends CommandBase {
     public FirePiston() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+//        requires(bottomClimbingPiston);
         requires(firePiston);
     }
 
